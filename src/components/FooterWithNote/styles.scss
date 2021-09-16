@@ -1,0 +1,9 @@
+.FooterWithNote {
+  margin-top: 2rem;
+
+  &__note {
+    text-align: center;
+    font-size: var(--font-size-primary);
+    color: var(--pal-text-secondary);
+  }
+}

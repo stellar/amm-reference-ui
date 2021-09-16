@@ -4,6 +4,7 @@ import { Layout } from "@stellar/design-system";
 
 import { store } from "config/store";
 import { Header } from "components/Header";
+import { FooterWithNote } from "components/FooterWithNote";
 
 import { PoolsOverview } from "pages/PoolsOverview";
 import { NotFound } from "pages/NotFound";
@@ -25,7 +26,7 @@ export const App = () => (
         </Switch>
       </Layout.Content>
 
-      <Layout.Footer gitHubLink="https://github.com/stellar/amm-reference-ui" />
+      <FooterWithNote />
     </Router>
   </Provider>
 );
