@@ -2,10 +2,8 @@ import {
   configureStore,
   isPlain,
   createAction,
-  // eslint-disable-next-line import/named
   CombinedState,
 } from "@reduxjs/toolkit";
-// eslint-disable-next-line import/named
 import { combineReducers, Action } from "redux";
 import BigNumber from "bignumber.js";
 
