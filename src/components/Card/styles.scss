@@ -1,0 +1,10 @@
+.Card {
+  --Card-padding: 1.5rem;
+  --Card-shadow: 0 0.5rem 1rem -0.5rem rgba(var(--pal-shadow-rbg), 0.08);
+
+  background-color: var(--pal-background-primary);
+  border: 1px solid var(--pal-border-primary);
+  border-radius: 0.5rem;
+  padding: var(--Card-padding);
+  box-shadow: var(--Card-shadow);
+}
