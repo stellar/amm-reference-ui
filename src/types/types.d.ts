@@ -4,3 +4,10 @@ export interface Store {
 }
 
 export type StoreKey = keyof Store;
+
+// TODO: move to SDS
+export enum StellarNetwork {
+  testnet = "testnet",
+  public = "public",
+  custom = "custom",
+}
