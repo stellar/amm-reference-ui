@@ -26,6 +26,7 @@
 
     img {
       @extend %icon;
+      display: block;
     }
 
     &__bullet {
