@@ -24,7 +24,6 @@ export const Avatar = ({ source, size, borderColor }: AvatarProps) => (
           : {}),
         ...(item.isFullSizeImage ? { "--Avatar-image-size": "100%" } : {}),
       } as React.CSSProperties;
-      console.log(item);
 
       return (
         <div key={item.assetCode} className="Avatar__item" style={customStyle}>
