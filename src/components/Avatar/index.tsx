@@ -1,8 +1,8 @@
 import "./styles.scss";
 
 interface AvatarSource {
-  assetCode: string;
   iconUrl?: string;
+  altText: string;
   backgroundColor?: string;
   isFullSizeImage?: boolean;
 }
@@ -26,11 +26,11 @@ export const Avatar = ({ source, size, borderColor }: AvatarProps) => (
       } as React.CSSProperties;
 
       return (
-        <div key={item.assetCode} className="Avatar__item" style={customStyle}>
+        <div key={item.altText} className="Avatar__item" style={customStyle}>
           {item.iconUrl ? (
-            <img alt={item.assetCode} src={item.iconUrl} />
+            <img alt={item.altText} src={item.iconUrl} />
           ) : (
-            <div key={item.assetCode} className="Avatar__item__bullet" />
+            <div key={item.altText} className="Avatar__item__bullet" />
           )}
         </div>
       );

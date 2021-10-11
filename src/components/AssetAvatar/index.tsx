@@ -17,12 +17,12 @@ const getCodeAndKey = (asset: string) => {
 };
 
 const NATIVE_ASSET = {
-  assetCode: "XLM",
+  altText: "XLM",
   iconUrl: StellarLogo,
 };
 
 export const AssetAvatar = ({ assets }: AvatarProps) => {
-  type Icons = { assetCode: string; iconUrl: string }[];
+  type Icons = { altText: string; iconUrl: string }[];
   const [icons, setIcons] = useState([NATIVE_ASSET] as Icons);
 
   useEffect(() => {
@@ -34,7 +34,10 @@ export const AssetAvatar = ({ assets }: AvatarProps) => {
           issuerKey,
         });
 
-        setIcons((prevIcons) => [...prevIcons, { assetCode, iconUrl }]);
+        setIcons((prevIcons) => [
+          ...prevIcons,
+          { altText: assetCode, iconUrl },
+        ]);
       }
     });
   }, [assets]);
