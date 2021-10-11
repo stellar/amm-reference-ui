@@ -30,7 +30,7 @@ export const Avatar = ({ source, size, borderColor }: AvatarProps) => (
           {item.iconUrl ? (
             <img alt={item.altText} src={item.iconUrl} />
           ) : (
-            <div key={item.altText} className="Avatar__item__bullet" />
+            <div className="Avatar__item__bullet" />
           )}
         </div>
       );
