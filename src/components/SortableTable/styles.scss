@@ -12,6 +12,7 @@ table.Table td:first-child:not(:last-child) {
   &--loading {
     opacity: var(--opacity-disabled-button);
     pointer-events: none;
+    overflow-y: hidden;
 
     .Loader {
       --Loader-color: var(--pal-brand-primary);

@@ -9,6 +9,8 @@ import BigNumber from "bignumber.js";
 
 import { RESET_STORE_ACTION_TYPE } from "constants/settings";
 
+import { reducer as poolTransactions } from "ducks/poolTransactions";
+
 export type RootState = ReturnType<typeof store.getState>;
 
 const loggerMiddleware =
@@ -22,7 +24,9 @@ const loggerMiddleware =
 const isSerializable = (value: any) =>
   BigNumber.isBigNumber(value) || isPlain(value);
 
-const reducers = combineReducers({});
+const reducers = combineReducers({
+  poolTransactions,
+});
 
 export const resetStoreAction = createAction(RESET_STORE_ACTION_TYPE);
 

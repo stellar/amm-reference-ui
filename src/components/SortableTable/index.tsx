@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// TODO: move to SDS
+import React, { useLayoutEffect, useState } from "react";
 import { sortBy } from "lodash";
 import { Icon, Loader } from "@stellar/design-system";
 import "./styles.scss";
@@ -15,6 +16,7 @@ interface SortableTableProps<DataItem> {
   renderItemRow: (item: DataItem) => React.ReactElement;
   hideNumberColumn?: boolean;
   isLoading?: boolean;
+  emptyMessage?: string;
 }
 
 enum SortOrder {
@@ -30,13 +32,15 @@ export const SortableTable = <DataItem,>({
   renderItemRow,
   hideNumberColumn,
   isLoading,
+  emptyMessage = "No transactions to show",
 }: SortableTableProps<DataItem>) => {
   const [localData, setLocalData] = useState(data);
   const [currentSortKey, setCurrentSortKey] = useState<string | null>(null);
   const [sortOrder, setSortOder] = useState<SortOrder | null>(null);
 
-  // TODO:
-  // pagination
+  useLayoutEffect(() => {
+    setLocalData(data);
+  }, [data]);
 
   const handleSort = (sortKey: string) => {
     let sortedData = data;
@@ -80,6 +84,8 @@ export const SortableTable = <DataItem,>({
     return null;
   };
 
+  // TODO: add pagination
+
   return (
     <div
       className={[
@@ -87,33 +93,37 @@ export const SortableTable = <DataItem,>({
         isLoading ? "TableContainer--loading" : "",
       ].join(" ")}
     >
-      <table className="Table SortableTable">
-        <thead>
-          <tr>
-            {hideNumberColumn ? null : <th>#</th>}
-            {columnLabels.map((lb) => (
-              <th
-                key={lb.id}
-                {...(lb.sortBy ? { onClick: () => handleSort(lb.id) } : {})}
-              >
-                <div className={lb.sortBy ? CSS_CLASS_SORTABLE : ""}>
-                  {lb.label}
-                  {renderSortIcon(lb.id)}
-                </div>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {localData.map((item, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <tr key={`row-${index}`}>
-              {hideNumberColumn ? null : <td>{index + 1}</td>}
-              {renderItemRow(item)}
+      {localData.length === 0 ? <p>{emptyMessage}</p> : null}
+
+      {localData.length > 0 ? (
+        <table className="Table SortableTable">
+          <thead>
+            <tr>
+              {hideNumberColumn ? null : <th>#</th>}
+              {columnLabels.map((lb) => (
+                <th
+                  key={lb.id}
+                  {...(lb.sortBy ? { onClick: () => handleSort(lb.id) } : {})}
+                >
+                  <div className={lb.sortBy ? CSS_CLASS_SORTABLE : ""}>
+                    {lb.label}
+                    {renderSortIcon(lb.id)}
+                  </div>
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {localData.map((item, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <tr key={`row-${index}`}>
+                {hideNumberColumn ? null : <td>{index + 1}</td>}
+                {renderItemRow(item)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : null}
 
       {isLoading ? <Loader size="3rem" /> : null}
     </div>
