@@ -8,10 +8,14 @@
   align-items: center;
   justify-content: flex-start;
 
+  %borderRadius {
+    border-radius: calc(var(--Avatar-size) / 2);
+  }
+
   &__item {
+    @extend %borderRadius;
     width: var(--Avatar-size);
     height: var(--Avatar-size);
-    border-radius: calc(var(--Avatar-size) / 2);
     background-color: var(--Avatar-background-color);
     border: 0.25rem solid var(--Avatar-border-color);
     overflow: hidden;
@@ -19,20 +23,20 @@
     align-items: center;
     justify-content: center;
 
-    %icon {
+    %avatarDimensions {
       width: var(--Avatar-image-size);
       height: var(--Avatar-image-size);
     }
 
     img {
-      @extend %icon;
+      @extend %avatarDimensions;
       display: block;
     }
 
     &__bullet {
-      @extend %icon;
+      @extend %avatarDimensions;
+      @extend %borderRadius;
       background-color: var(--pal-brand-primary);
-      border-radius: 2rem;
     }
 
     &:not(:first-child) {
