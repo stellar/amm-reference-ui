@@ -1,7 +1,7 @@
 import "./styles.scss";
 
 interface AvatarSource {
-  iconUrl: string;
+  iconUrl?: string;
   altText: string;
   backgroundColor?: string;
   isFullSizeImage?: boolean;
@@ -27,7 +27,11 @@ export const Avatar = ({ source, size, borderColor }: AvatarProps) => (
 
       return (
         <div key={item.altText} className="Avatar__item" style={customStyle}>
-          <img alt={item.altText} src={item.iconUrl} />
+          {item.iconUrl ? (
+            <img alt={item.altText} src={item.iconUrl} />
+          ) : (
+            <div className="Avatar__item__bullet" />
+          )}
         </div>
       );
     })}
