@@ -2,6 +2,7 @@
   --Avatar-size: 3rem;
   --Avatar-image-size: 70%;
   --Avatar-border-color: var(--pal-background-primary);
+  --Avatar-border-width: calc(var(--Avatar-size) / 12);
   --Avatar-background-color: var(--pal-background-secondary);
 
   display: flex;
@@ -17,7 +18,7 @@
     width: var(--Avatar-size);
     height: var(--Avatar-size);
     background-color: var(--Avatar-background-color);
-    border: 0.25rem solid var(--Avatar-border-color);
+    border: var(--Avatar-border-width) solid var(--Avatar-border-color);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -40,7 +41,7 @@
     }
 
     &:not(:first-child) {
-      margin-left: -1.5rem;
+      margin-left: calc(var(--Avatar-size) / 2 * -1);
     }
   }
 }
