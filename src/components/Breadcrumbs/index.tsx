@@ -1,3 +1,4 @@
+import { TextLink } from "@stellar/design-system";
 import "./styles.scss";
 
 interface BreadcrumbsLink {
@@ -7,17 +8,16 @@ interface BreadcrumbsLink {
 
 interface BreadcrumbsProps {
   links: BreadcrumbsLink[];
+  onClick: (route: string) => void;
 }
 
-const generateKey = (text: string) => text.toLowerCase().replace(" ", "-");
+const generateKey = (text: string) => text.toLowerCase().replace(/\s+/g, "-");
 
-export const Breadcrumbs = ({ links }: BreadcrumbsProps) => (
+export const Breadcrumbs = ({ links, onClick }: BreadcrumbsProps) => (
   <div className="Breadcrumbs">
     {links.map((ln) => (
-      <div className="Breadcrumbs__link">
-        <a key={generateKey(ln.text)} href={ln.link}>
-          {ln.text}
-        </a>
+      <div className="Breadcrumbs__link" key={generateKey(ln.text)}>
+        <TextLink onClick={() => onClick(ln.link)}>{ln.text}</TextLink>
       </div>
     ))}
   </div>
