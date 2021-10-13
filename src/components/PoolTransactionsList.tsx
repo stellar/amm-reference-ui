@@ -6,6 +6,7 @@ import { SortableTable } from "components/SortableTable";
 import { STELLAR_EXPERT_TX } from "constants/apiUrls";
 import { fetchPoolTransactionsAction } from "ducks/poolTransactions";
 import { formatAmount } from "helpers/formatAmount";
+import { getAssetCode } from "helpers/getAssetCode";
 import { useRedux } from "hooks/useRedux";
 import {
   LiquidityPoolTransaction,
@@ -50,9 +51,6 @@ export const PoolTransactionsList = ({ poolId }: { poolId: string }) => {
       sortBy: true,
     },
   ];
-
-  const getAssetCode = (assetString: string) =>
-    assetString === "native" ? "XLM" : assetString.split(":")[0];
 
   const formatReserveAmount = (reserve: LiquidityPoolReserve) =>
     `${formatAmount(reserve.amount)} ${getAssetCode(reserve.asset)}`;

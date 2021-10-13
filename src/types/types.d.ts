@@ -17,11 +17,17 @@ export interface RejectMessage {
 
 // Store
 export interface Store {
+  poolInfo: PoolInfoInitialState;
   poolTransactions: PoolTransactionsInitialState;
 }
 
 export type StoreKey = keyof Store;
 
+export interface PoolInfoInitialState {
+  data: LiquidityPoolInfo | null;
+  status: ActionStatus | undefined;
+  errorString?: string;
+}
 export interface PoolTransactionsInitialState {
   data: LiquidityPoolTransaction[];
   status: ActionStatus | undefined;
@@ -54,4 +60,13 @@ export interface LiquidityPoolTransaction {
   reserves: LiquidityPoolReserve[];
   transactionHash: string;
   type: string;
+}
+
+export interface LiquidityPoolInfo {
+  id: string;
+  reserves: LiquidityPoolReserve[];
+  reserveAssets: string[];
+  totalShares: string;
+  totalTrustlines: string;
+  fee: number;
 }
