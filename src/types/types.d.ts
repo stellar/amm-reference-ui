@@ -17,6 +17,7 @@ export interface RejectMessage {
 
 // Store
 export interface Store {
+  poolHistory: PoolHistoryInitialState;
   poolTransactions: PoolTransactionsInitialState;
 }
 
@@ -24,6 +25,12 @@ export type StoreKey = keyof Store;
 
 export interface PoolTransactionsInitialState {
   data: LiquidityPoolTransaction[];
+  status: ActionStatus | undefined;
+  errorString?: string;
+}
+
+export interface PoolHistoryInitialState {
+  data: LiquidityPoolHistory[];
   status: ActionStatus | undefined;
   errorString?: string;
 }
@@ -55,3 +62,10 @@ export interface LiquidityPoolTransaction {
   transactionHash: string;
   type: string;
 }
+
+export type LiquidityPoolHistory = {
+  ts: number;
+  /* eslint-disable camelcase */
+  total_value_locked: string;
+  /* eslint-enable camelcase */
+};

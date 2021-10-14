@@ -1,0 +1,39 @@
+.Chart {
+  background: #fff;
+  display: flex;
+  height: 428px;
+  width: 792px;
+
+  &__gradient_def {
+    height: 0;
+    position: absolute;
+    width: 0;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    &__label {
+      font-size: var(--font-size);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5rem;
+    }
+    &__timeframe {
+      font-size: var(--font-size);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5rem;
+    }
+    &__button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: var(--font-size-secondary);
+      opacity: 0.4;
+      -webkit-appearance: none;
+      &--active {
+        opacity: 1;
+      }
+    }
+  }
+}

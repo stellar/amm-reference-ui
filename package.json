@@ -12,6 +12,7 @@
     "@popperjs/core": "^2.10.1",
     "@reduxjs/toolkit": "^1.6.1",
     "@stellar/design-system": "^0.4.0",
+    "@stellar/frontend-helpers": "^2.1.3",
     "amplitude-js": "^8.4.0",
     "bignumber.js": "^9.0.1",
     "lodash": "^4.17.21",
@@ -26,7 +27,8 @@
     "redux": "^4.1.0",
     "stellar-sdk": "^9.0.0-beta.0",
     "tslib": "^2.3.0",
-    "typescript": "~4.4.3"
+    "typescript": "~4.4.3",
+    "victory": "^36.0.1"
   },
   "scripts": {
     "install-if-package-changed": "git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep --quiet yarn.lock && yarn install || exit 0",

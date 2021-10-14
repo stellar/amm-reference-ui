@@ -103,11 +103,98 @@ export const handlers = [
               ],
             },
             {
-              ts: 1631522105,
+              ts: 1634074591,
               paging_token: "613f14189cbc3d04b66707ec",
               shares: "1000",
               trades: 1922,
               total_value_locked: "100500",
+              earned_fees: [
+                {
+                  asset:
+                    "USDC-GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN-1",
+                  amount: "217000",
+                },
+                {
+                  asset: "XLM",
+                  amount: "648000",
+                },
+              ],
+              volume: [
+                {
+                  asset:
+                    "USDC-GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN-1",
+                  volume: "31054645464",
+                },
+                {
+                  asset: "XLM",
+                  volume: "94546541313",
+                },
+              ],
+            },
+            {
+              ts: 1633968262,
+              paging_token: "613f14189cbc3d04b66707ec",
+              shares: "1000",
+              trades: 1922,
+              total_value_locked: "120100",
+              earned_fees: [
+                {
+                  asset:
+                    "USDC-GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN-1",
+                  amount: "217000",
+                },
+                {
+                  asset: "XLM",
+                  amount: "648000",
+                },
+              ],
+              volume: [
+                {
+                  asset:
+                    "USDC-GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN-1",
+                  volume: "31054645464",
+                },
+                {
+                  asset: "XLM",
+                  volume: "94546541313",
+                },
+              ],
+            },
+            {
+              ts: 1633881862,
+              paging_token: "613f14189cbc3d04b66707ec",
+              shares: "1000",
+              trades: 1922,
+              total_value_locked: "8100",
+              earned_fees: [
+                {
+                  asset:
+                    "USDC-GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN-1",
+                  amount: "217000",
+                },
+                {
+                  asset: "XLM",
+                  amount: "648000",
+                },
+              ],
+              volume: [
+                {
+                  asset:
+                    "USDC-GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN-1",
+                  volume: "31054645464",
+                },
+                {
+                  asset: "XLM",
+                  volume: "94546541313",
+                },
+              ],
+            },
+            {
+              ts: 1633795462,
+              paging_token: "613f14189cbc3d04b66707ec",
+              shares: "1000",
+              trades: 1922,
+              total_value_locked: "12100",
               earned_fees: [
                 {
                   asset:
