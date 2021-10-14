@@ -1,0 +1,30 @@
+.AssetConversions {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  &__asset {
+    display: flex;
+    align-items: center;
+    background-color: var(--pal-background-tertiary);
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+
+    &:first-child {
+      margin-right: 0.5rem;
+    }
+
+    span {
+      margin-left: 0.5rem;
+      font-size: var(--font-size-secondary);
+      line-height: 1.5rem;
+      font-weight: var(--font-weight-medium);
+      color: var(--pal-text-secondary);
+    }
+
+    .Avatar {
+      --Avatar-size: 1.5rem;
+      --Avatar-image-size: 100%;
+    }
+  }
+}

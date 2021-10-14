@@ -24,3 +24,25 @@
     color: var(--pal-brand-primary);
   }
 }
+
+// Pool details
+.PoolDetails {
+  &__title {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+
+    h2 {
+      font-size: 1.5rem;
+      line-height: 2.25rem;
+      font-weight: var(--font-weight-medium);
+      margin-left: 0.5rem;
+    }
+
+    .Avatar {
+      --Avatar-size: 2rem;
+      --Avatar-image-size: 100%;
+    }
+  }
+}

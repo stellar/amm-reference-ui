@@ -9,6 +9,7 @@ import BigNumber from "bignumber.js";
 
 import { RESET_STORE_ACTION_TYPE } from "constants/settings";
 
+import { reducer as poolInfo } from "ducks/poolInfo";
 import { reducer as poolTransactions } from "ducks/poolTransactions";
 import { reducer as poolHistory } from "ducks/poolHistory";
 
@@ -27,6 +28,7 @@ const isSerializable = (value: any) =>
 
 const reducers = combineReducers({
   poolHistory,
+  poolInfo,
   poolTransactions,
 });
 

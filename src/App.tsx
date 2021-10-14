@@ -7,6 +7,7 @@ import { Header } from "components/Header";
 import { FooterWithNote } from "components/FooterWithNote";
 
 import { PoolsOverview } from "pages/PoolsOverview";
+import { PoolDetails } from "pages/PoolDetails";
 import { NotFound } from "pages/NotFound";
 
 import "styles.scss";
@@ -20,6 +21,10 @@ export const App = () => (
         <Switch>
           <Route exact path="/">
             <PoolsOverview />
+          </Route>
+
+          <Route exact path="/pool/:poolId">
+            <PoolDetails />
           </Route>
 
           <Route component={NotFound} />

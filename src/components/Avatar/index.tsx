@@ -1,7 +1,7 @@
 import "./styles.scss";
 
 interface AvatarSource {
-  iconUrl?: string;
+  iconUrl: string | undefined;
   altText: string;
   backgroundColor?: string;
   isFullSizeImage?: boolean;
