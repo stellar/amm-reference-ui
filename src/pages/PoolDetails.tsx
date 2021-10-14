@@ -2,9 +2,13 @@ import { useEffect } from "react";
 import { Layout, Heading2 } from "@stellar/design-system";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { AssetAvatar } from "components/AssetAvatar";
+import { Avatar } from "components/Avatar";
 import { AssetConversions } from "components/AssetConversions";
 import { Breadcrumbs } from "components/Breadcrumbs";
+import {
+  fetchPoolAvatarsAction,
+  resetPoolAvatarsAction,
+} from "ducks/poolAvatars";
 import { fetchPoolInfoAction, resetPoolInfoAction } from "ducks/poolInfo";
 import { useRedux } from "hooks/useRedux";
 
@@ -12,7 +16,7 @@ export const PoolDetails = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { poolInfo } = useRedux("poolInfo");
+  const { poolInfo, poolAvatars } = useRedux("poolInfo", "poolAvatars");
   const { poolId } = useParams<{ poolId: string }>();
 
   useEffect(() => {
@@ -22,6 +26,16 @@ export const PoolDetails = () => {
       dispatch(resetPoolInfoAction());
     };
   }, [dispatch, poolId]);
+
+  useEffect(() => {
+    if (poolInfo.data?.reserves) {
+      dispatch(fetchPoolAvatarsAction(poolInfo.data.reserves));
+    }
+
+    return () => {
+      dispatch(resetPoolAvatarsAction());
+    };
+  }, [dispatch, poolInfo.data?.reserves]);
 
   const handleRouteClick = (route: string) => {
     history.push(route);
@@ -50,15 +64,13 @@ export const PoolDetails = () => {
           onClick={handleRouteClick}
         />
         <div className="PoolDetails__title">
-          <AssetAvatar
-            assets={[
-              poolInfo.data.reserves[0].asset,
-              poolInfo.data.reserves[1].asset,
-            ]}
-          />
+          <Avatar source={poolAvatars.data} />
           <Heading2>{getAssetPairString()}</Heading2>
         </div>
-        <AssetConversions reserves={poolInfo.data.reserves} />
+        <AssetConversions
+          reserves={poolInfo.data.reserves}
+          avatars={poolAvatars.data}
+        />
       </Layout.Inset>
     </div>
   );
