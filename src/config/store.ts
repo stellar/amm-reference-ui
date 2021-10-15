@@ -11,6 +11,7 @@ import { RESET_STORE_ACTION_TYPE } from "constants/settings";
 
 import { reducer as poolAvatars } from "ducks/poolAvatars";
 import { reducer as poolInfo } from "ducks/poolInfo";
+import { reducer as poolStats } from "ducks/poolStats";
 import { reducer as poolTransactions } from "ducks/poolTransactions";
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -29,6 +30,7 @@ const isSerializable = (value: any) =>
 const reducers = combineReducers({
   poolAvatars,
   poolInfo,
+  poolStats,
   poolTransactions,
 });
 

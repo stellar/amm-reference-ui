@@ -19,6 +19,7 @@ export interface RejectMessage {
 export interface Store {
   poolAvatars: PoolAvatarsInitialState;
   poolInfo: PoolInfoInitialState;
+  poolStats: PoolStatsInitialState;
   poolTransactions: PoolTransactionsInitialState;
 }
 
@@ -34,6 +35,12 @@ export interface PoolInfoInitialState {
   status: ActionStatus | undefined;
   errorString?: string;
 }
+
+export interface PoolStatsInitialState {
+  data: LiquidityPoolStats | null;
+  status: ActionStatus | undefined;
+  errorString?: string;
+}
 export interface PoolTransactionsInitialState {
   data: LiquidityPoolTransaction[];
   status: ActionStatus | undefined;
@@ -44,6 +51,15 @@ export interface PoolTransactionsInitialState {
 export interface LiquidityPoolReserve {
   asset: string;
   amount: string;
+  assetCode?: string;
+}
+
+export interface LiquidityPoolAssetInterval {
+  asset: string;
+  "24h": string;
+  "7d": string;
+  "1y": string;
+  assetCode?: string;
 }
 export interface LiquidityPoolOperation {
   [key: string]: any;
@@ -80,4 +96,15 @@ export interface LiquidityPoolInfo {
   totalShares: string;
   totalTrustlines: string;
   fee: number;
+}
+
+export interface LiquidityPoolStats {
+  id: string;
+  assets: LiquidityPoolReserve[];
+  earnedFees: LiquidityPoolAssetInterval[];
+  fee: number | string;
+  shares: string;
+  totalValueLocked: string;
+  tradesCount: number | string;
+  volume: LiquidityPoolAssetInterval[];
 }

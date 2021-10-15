@@ -11,7 +11,7 @@
   "dependencies": {
     "@popperjs/core": "^2.10.1",
     "@reduxjs/toolkit": "^1.6.1",
-    "@stellar/design-system": "^0.4.0",
+    "@stellar/design-system": "^0.4.1",
     "amplitude-js": "^8.4.0",
     "bignumber.js": "^9.0.1",
     "lodash": "^4.17.21",

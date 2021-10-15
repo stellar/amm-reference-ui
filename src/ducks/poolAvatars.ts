@@ -69,7 +69,7 @@ const poolAvatarsSlice = createSlice({
   },
 });
 
-export const poolInfoSelector = (state: RootState) => state.poolInfo;
+export const poolAvatarsSelector = (state: RootState) => state.poolAvatars;
 
 export const { reducer } = poolAvatarsSlice;
 export const { resetPoolAvatarsAction } = poolAvatarsSlice.actions;

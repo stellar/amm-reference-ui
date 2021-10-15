@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { Avatar } from "components/Avatar";
 import { AssetConversions } from "components/AssetConversions";
 import { Breadcrumbs } from "components/Breadcrumbs";
+import { PoolStats } from "components/PoolStats";
 import {
   fetchPoolAvatarsAction,
   resetPoolAvatarsAction,
@@ -71,6 +72,10 @@ export const PoolDetails = () => {
           reserves={poolInfo.data.reserves}
           avatars={poolAvatars.data}
         />
+
+        <div>
+          <PoolStats />
+        </div>
       </Layout.Inset>
     </div>
   );

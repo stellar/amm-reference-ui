@@ -3,7 +3,7 @@ import { rest } from "msw";
 import { STELLAR_EXPERT_AMM_URL } from "constants/apiUrls";
 
 export const handlers = [
-  rest.get(`${STELLAR_EXPERT_AMM_URL}/pool/1/stats`, (_req, res, ctx) =>
+  rest.get(`${STELLAR_EXPERT_AMM_URL}/pool/:id/stats`, (_req, res, ctx) =>
     res(
       ctx.status(200),
       ctx.json({
@@ -56,7 +56,7 @@ export const handlers = [
       }),
     ),
   ),
-  rest.get(`${STELLAR_EXPERT_AMM_URL}/pool/1/history`, (_req, res, ctx) =>
+  rest.get(`${STELLAR_EXPERT_AMM_URL}/pool/:id/history`, (_req, res, ctx) =>
     res(
       ctx.status(200),
       ctx.json({
