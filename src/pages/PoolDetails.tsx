@@ -5,6 +5,11 @@ import { useDispatch } from "react-redux";
 import { AssetAvatar } from "components/AssetAvatar";
 import { AssetConversions } from "components/AssetConversions";
 import { Breadcrumbs } from "components/Breadcrumbs";
+import { DetailsChart } from "components/DetailsChart";
+import {
+  fetchPoolHistoryAction,
+  resetPoolHistoryAction,
+} from "ducks/poolHistory";
 import { fetchPoolInfoAction, resetPoolInfoAction } from "ducks/poolInfo";
 import { useRedux } from "hooks/useRedux";
 
@@ -13,13 +18,16 @@ export const PoolDetails = () => {
   const history = useHistory();
 
   const { poolInfo } = useRedux("poolInfo");
+  const { poolHistory } = useRedux("poolHistory");
   const { poolId } = useParams<{ poolId: string }>();
 
   useEffect(() => {
     dispatch(fetchPoolInfoAction(poolId));
+    dispatch(fetchPoolHistoryAction(poolId));
 
     return () => {
       dispatch(resetPoolInfoAction());
+      dispatch(resetPoolHistoryAction());
     };
   }, [dispatch, poolId]);
 
@@ -59,6 +67,7 @@ export const PoolDetails = () => {
           <Heading2>{getAssetPairString()}</Heading2>
         </div>
         <AssetConversions reserves={poolInfo.data.reserves} />
+        <DetailsChart poolHistory={poolHistory} />
       </Layout.Inset>
     </div>
   );

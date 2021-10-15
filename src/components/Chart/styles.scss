@@ -1,8 +1,8 @@
 .Chart {
-  background: #fff;
-  display: flex;
-  height: 428px;
-  width: 792px;
+  --Chart-header-color: var(--pal-text-primary);
+
+  height: 100%;
+  width: 100%;
 
   &__gradient_def {
     height: 0;
@@ -11,8 +11,34 @@
   }
 
   &__header {
-    display: flex;
-    justify-content: space-between;
+    &__row {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__values {
+      height: 2.625rem;
+    }
+
+    &__text {
+      color: var(--Chart-header-color);
+      font-size: 1.5rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 2rem;
+      margin-bottom: 0;
+    }
+
+    &__note {
+      font-size: 0.75rem;
+      line-height: 1.25rem;
+
+      &--positive {
+        color: var(--pal-success);
+      }
+
+      &--negative {
+        color: var(--pal-error);
+      }
+    }
 
     &__label {
       font-size: var(--font-size);

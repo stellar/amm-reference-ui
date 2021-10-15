@@ -26,8 +26,6 @@ export const fetchPoolHistoryAction = createAsyncThunk<
       });
     }
 
-    console.log(poolHistory);
-
     return poolHistory;
   },
 );
@@ -41,7 +39,9 @@ const initialState: PoolHistoryInitialState = {
 const poolHistorySlice = createSlice({
   name: "poolHistory",
   initialState,
-  reducers: {},
+  reducers: {
+    resetPoolHistoryAction: () => initialState,
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchPoolHistoryAction.pending, (state = initialState) => {
       state.status = ActionStatus.PENDING;
@@ -60,3 +60,4 @@ const poolHistorySlice = createSlice({
 export const poolHistorySelector = (state: RootState) => state.poolHistory;
 
 export const { reducer } = poolHistorySlice;
+export const { resetPoolHistoryAction } = poolHistorySlice.actions;

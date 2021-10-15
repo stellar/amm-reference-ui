@@ -5,6 +5,8 @@
   background-color: var(--pal-background-primary);
   border: 1px solid var(--pal-border-primary);
   border-radius: 0.5rem;
-  padding: var(--Card-padding);
   box-shadow: var(--Card-shadow);
+  height: 100%;
+  padding: var(--Card-padding);
+  width: 100%;
 }
