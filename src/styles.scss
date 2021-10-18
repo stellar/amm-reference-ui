@@ -6,6 +6,11 @@
   .ProjectLogo__title {
     display: none;
   }
+
+  // Making it default for now
+  .Avatar {
+    --Avatar-image-size: 100%;
+  }
 }
 
 .Section {

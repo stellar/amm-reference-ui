@@ -1,30 +1,10 @@
 import { useEffect, useState } from "react";
-import { getIconUrlFromIssuer } from "helpers/getIconUrlFromIssuer";
+import { getAssetAvatarProps } from "helpers/getAssetAvatarProps";
 import { Avatar } from "components/Avatar";
-import StellarLogo from "assets/stellar-logo.png";
 
 interface AvatarProps {
   assets: string[];
 }
-
-const getCodeAndKey = (asset: string) => {
-  const splitArr = asset.split(":");
-
-  return {
-    assetCode: splitArr[0],
-    issuerKey: splitArr[1],
-  };
-};
-
-const DEFAULT_ASSET = {
-  altText: "",
-  iconUrl: "",
-};
-
-const NATIVE_ASSET = {
-  altText: "XLM",
-  iconUrl: StellarLogo,
-};
 
 export const AssetAvatar = ({ assets }: AvatarProps) => {
   type Icon = { altText: string; iconUrl: string };
@@ -36,7 +16,10 @@ export const AssetAvatar = ({ assets }: AvatarProps) => {
 
     // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < assets.length; i++) {
-      iconDefaults.push(DEFAULT_ASSET);
+      iconDefaults.push({
+        altText: `asset-${i}`,
+        iconUrl: "",
+      });
     }
 
     setIcons(iconDefaults);
@@ -50,27 +33,8 @@ export const AssetAvatar = ({ assets }: AvatarProps) => {
     };
 
     assets.forEach(async (asset, index) => {
-      if (asset !== "native") {
-        const { assetCode, issuerKey } = getCodeAndKey(asset);
-        const iconUrl = await getIconUrlFromIssuer({
-          assetCode,
-          issuerKey,
-        });
-
-        setIcons((prevIcons) =>
-          updateAssetIcon(prevIcons, index, {
-            altText: assetCode,
-            iconUrl,
-          }),
-        );
-      } else {
-        setIcons((prevIcons) =>
-          updateAssetIcon(prevIcons, index, {
-            altText: NATIVE_ASSET.altText,
-            iconUrl: NATIVE_ASSET.iconUrl,
-          }),
-        );
-      }
+      const avatarProps = await getAssetAvatarProps(asset);
+      setIcons((prevIcons) => updateAssetIcon(prevIcons, index, avatarProps));
     });
   }, [assets]);
 

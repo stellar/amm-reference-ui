@@ -17,15 +17,28 @@ export interface RejectMessage {
 
 // Store
 export interface Store {
+  poolAvatars: PoolAvatarsInitialState;
   poolHistory: PoolHistoryInitialState;
   poolInfo: PoolInfoInitialState;
+  poolStats: PoolStatsInitialState;
   poolTransactions: PoolTransactionsInitialState;
 }
 
 export type StoreKey = keyof Store;
 
+export interface PoolAvatarsInitialState {
+  data: AssetAvatar[];
+  status: ActionStatus | undefined;
+  errorString?: string;
+}
 export interface PoolInfoInitialState {
   data: LiquidityPoolInfo | null;
+  status: ActionStatus | undefined;
+  errorString?: string;
+}
+
+export interface PoolStatsInitialState {
+  data: LiquidityPoolStats | null;
   status: ActionStatus | undefined;
   errorString?: string;
 }
@@ -41,10 +54,24 @@ export interface PoolHistoryInitialState {
   errorString?: string;
 }
 
-// Liquidity pool
-export interface LiquidityPoolReserve {
+export interface LiquidityPoolAsset {
   asset: string;
+  assetCode?: string;
+  amount?: string;
+  "24h"?: string;
+  "7d"?: string;
+  "1y"?: string;
+}
+
+// Liquidity pool
+export interface LiquidityPoolReserve extends LiquidityPoolAsset {
   amount: string;
+}
+
+export interface LiquidityPoolAssetInterval extends LiquidityPoolAsset {
+  "24h": string;
+  "7d": string;
+  "1y": string;
 }
 export interface LiquidityPoolOperation {
   [key: string]: any;
@@ -75,6 +102,10 @@ export type LiquidityPoolHistory = {
   total_value_locked: string;
   /* eslint-enable camelcase */
 };
+export interface AssetAvatar {
+  altText: string;
+  iconUrl: string | undefined;
+}
 
 export interface LiquidityPoolInfo {
   id: string;
@@ -83,6 +114,17 @@ export interface LiquidityPoolInfo {
   totalShares: string;
   totalTrustlines: string;
   fee: number;
+}
+
+export interface LiquidityPoolStats {
+  id: string;
+  assets: LiquidityPoolReserve[];
+  earnedFees: LiquidityPoolAssetInterval[];
+  fee: number | string;
+  shares: string;
+  totalValueLocked: string;
+  tradesCount: number | string;
+  volume: LiquidityPoolAssetInterval[];
 }
 
 // Chart
