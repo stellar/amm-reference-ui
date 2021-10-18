@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Loader } from "@stellar/design-system";
 import { Avatar } from "components/Avatar";
 import { Card } from "components/Card";
 import { StatItem } from "components/StatItem";
@@ -7,10 +8,7 @@ import { fetchPoolStatsAction } from "ducks/poolStats";
 import { formatAmount } from "helpers/formatAmount";
 import { formatConversion } from "helpers/formatConversion";
 import { useRedux } from "hooks/useRedux";
-import {
-  LiquidityPoolReserve,
-  LiquidityPoolAssetInterval,
-} from "types/types.d";
+import { ActionStatus, LiquidityPoolAsset } from "types/types.d";
 import "./styles.scss";
 
 export const PoolStats = () => {
@@ -33,37 +31,38 @@ export const PoolStats = () => {
     assets,
     assetCode,
   }: {
-    assets?: any[];
+    assets: LiquidityPoolAsset[];
     assetCode: string;
   }) => (assets || []).find((a) => a.assetCode === assetCode);
 
-  const formatAssetAmount = (asset?: LiquidityPoolReserve) => {
+  const formatAssetAmount = (asset?: LiquidityPoolAsset) => {
     if (!asset) {
       return "";
     }
 
-    return `${formatConversion(asset.amount)} ${asset.assetCode}`;
-  };
-
-  const formatIntervalAmount = (asset?: LiquidityPoolAssetInterval) => {
-    if (!asset) {
-      return "";
+    if (asset["24h"]) {
+      return `${formatConversion(asset["24h"])} ${asset.assetCode}`;
     }
 
-    return `${formatConversion(asset["24h"])} ${asset.assetCode}`;
+    if (asset.amount) {
+      return `${formatConversion(asset.amount)} ${asset.assetCode}`;
+    }
+
+    // This is unlikely
+    return "";
   };
 
   if (!poolInfo.data || !poolStats.data) {
     return null;
   }
 
-  const renderPooledTokens = () => (
+  const renderTokens = (assetSource: LiquidityPoolAsset[]) => (
     <>
       <div className="PoolStats__token">
         <Avatar source={[poolAvatars.data[0]]} />{" "}
         {formatAssetAmount(
           getAssetByAssetCode({
-            assets: poolStats.data?.assets,
+            assets: assetSource,
             assetCode: poolAvatars.data[0].altText,
           }),
         )}
@@ -72,7 +71,7 @@ export const PoolStats = () => {
         <Avatar source={[poolAvatars.data[1]]} />{" "}
         {formatAssetAmount(
           getAssetByAssetCode({
-            assets: poolStats.data?.assets,
+            assets: assetSource,
             assetCode: poolAvatars.data[1].altText,
           }),
         )}
@@ -82,37 +81,30 @@ export const PoolStats = () => {
 
   const statsData = [
     {
-      id: "vol-24h",
-      label: "Volume 24h",
-      content: formatIntervalAmount(
-        getAssetByAssetCode({
-          assets: poolStats.data?.volume,
-          assetCode: poolAvatars.data[0].altText,
-        }),
-      ),
+      id: "participants",
+      label: "Participants",
+      content: formatAmount(poolInfo.data.totalTrustlines),
       // TODO: add details
       details: "Details",
-      // note: "+$131,500 (+5.11%)",
-      // isNoteNegative: false,
+    },
+    {
+      id: "vol-24h",
+      label: "Volume 24h",
+      content: renderTokens(poolStats.data?.volume),
+      // TODO: add details
+      details: "Details",
     },
     {
       id: "fees-24h",
       label: "Fees 24h",
-      content: formatIntervalAmount(
-        getAssetByAssetCode({
-          assets: poolStats.data?.earnedFees,
-          assetCode: poolAvatars.data[0].altText,
-        }),
-      ),
+      content: renderTokens(poolStats.data?.earnedFees),
       // TODO: add details
       details: "Details",
-      // note: "-$8,361.02 (-5.11%)",
-      // isNoteNegative: true,
     },
     {
-      id: "participants",
-      label: "Participants",
-      content: formatAmount(poolInfo.data.totalTrustlines),
+      id: "pooled-tokens",
+      label: "Pooled Tokens",
+      content: renderTokens(poolStats.data?.assets),
       // TODO: add details
       details: "Details",
     },
@@ -120,27 +112,21 @@ export const PoolStats = () => {
 
   return (
     <Card>
-      <div className="PoolStats">
-        <div className="PoolStats__items">
-          {statsData.map((s) => (
-            <React.Fragment key={s.id}>
-              <StatItem
-                label={s.label}
-                details={s.details}
-                // note={s.note}
-                // isNoteNegative={Boolean(s.isNoteNegative)}
-              >
-                {s.content}
-              </StatItem>
-            </React.Fragment>
-          ))}
+      {poolAvatars.status === ActionStatus.PENDING ? (
+        <Loader />
+      ) : (
+        <div className="PoolStats">
+          <div className="PoolStats__items">
+            {statsData.map((s) => (
+              <React.Fragment key={s.id}>
+                <StatItem label={s.label} details={s.details}>
+                  {s.content}
+                </StatItem>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
-
-        {/* TODO: add details */}
-        <StatItem label="Pooled Tokens" details="Details">
-          {renderPooledTokens()}
-        </StatItem>
-      </div>
+      )}
     </Card>
   );
 };

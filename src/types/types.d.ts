@@ -47,19 +47,24 @@ export interface PoolTransactionsInitialState {
   errorString?: string;
 }
 
-// Liquidity pool
-export interface LiquidityPoolReserve {
+export interface LiquidityPoolAsset {
   asset: string;
-  amount: string;
   assetCode?: string;
+  amount?: string;
+  "24h"?: string;
+  "7d"?: string;
+  "1y"?: string;
 }
 
-export interface LiquidityPoolAssetInterval {
-  asset: string;
+// Liquidity pool
+export interface LiquidityPoolReserve extends LiquidityPoolAsset {
+  amount: string;
+}
+
+export interface LiquidityPoolAssetInterval extends LiquidityPoolAsset {
   "24h": string;
   "7d": string;
   "1y": string;
-  assetCode?: string;
 }
 export interface LiquidityPoolOperation {
   [key: string]: any;
