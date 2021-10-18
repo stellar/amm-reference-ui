@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Card } from "components/Card";
 import { Chart } from "components/Chart";
 import { ChartData, LiquidityPoolHistory } from "types/types.d";
 
@@ -20,18 +21,20 @@ export const DetailsChart = ({ poolHistory }: DetailsChartProps) => {
 
   return (
     <div className="DetailsChart">
-      <Chart
-        chartData={chartData}
-        colorRgb={[62, 27, 219]}
-        header={{
-          title: "TVL",
-          description: "Total Value Locked",
-        }}
-        timeframes={[
-          { label: "1M", segments: 30 },
-          { label: "1W", segments: 7 },
-        ]}
-      />
+      <Card>
+        <Chart
+          chartData={chartData}
+          colorRgb={[62, 27, 219]}
+          header={{
+            title: "TVL",
+            description: "Total Value Locked",
+          }}
+          timeframes={[
+            { label: "1M", segments: 30 },
+            { label: "1W", segments: 7 },
+          ]}
+        />
+      </Card>
     </div>
   );
 };
