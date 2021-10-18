@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card } from "components/Card";
 import { Chart } from "components/Chart";
+import { getCssVar } from "helpers/cssHelpers";
 import { ChartData, LiquidityPoolHistory } from "types/types.d";
 
 import "./styles.scss";
@@ -24,10 +25,14 @@ export const DetailsChart = ({ poolHistory }: DetailsChartProps) => {
       <Card>
         <Chart
           chartData={chartData}
-          colorRgb={[62, 27, 219]}
           header={{
             title: "TVL",
             description: "Total Value Locked",
+          }}
+          theme={{
+            primaryColor: getCssVar("--pal-brand-primary"),
+            bgColor: getCssVar("--pal-background-primary"),
+            tickLabels: getCssVar("--pal-text-secondary"),
           }}
           timeframes={[
             { label: "1M", segments: 30 },

@@ -12,8 +12,18 @@
 
   &__header {
     &__row {
+      align-items: center;
       display: flex;
       justify-content: space-between;
+    }
+    &__title {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        margin-left: 0.3rem;
+      }
     }
     &__values {
       height: 2.625rem;

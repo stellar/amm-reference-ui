@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { DetailsTooltip } from "@stellar/design-system";
+import { IconButton, Icon } from "@stellar/design-system";
 import { VictoryArea, VictoryAxis, VictoryChart, VictoryGroup } from "victory";
+import { Tooltip } from "components/Tooltip";
+import { getRgbaFromHex } from "helpers/cssHelpers";
 import { formatAmount } from "helpers/formatAmount";
 import { ChartData } from "types/types.d";
 
@@ -10,19 +12,23 @@ type TimeFrames = { label: string; segments: number | undefined }[];
 
 interface ChartProps {
   chartData: ChartData[];
-  colorRgb: number[];
   header: {
     title: string;
     description: string;
     h1Color?: string;
+  };
+  theme: {
+    primaryColor: string;
+    bgColor: string;
+    tickLabels: string;
   };
   timeframes?: TimeFrames;
 }
 
 export const Chart = ({
   chartData,
-  colorRgb,
   header,
+  theme,
   timeframes = [],
 }: ChartProps) => {
   const customStyle = {
@@ -32,8 +38,6 @@ export const Chart = ({
     () => [...timeframes, { label: "ALL", segments: undefined }],
     [timeframes],
   );
-  const rgbStr = colorRgb.toString();
-
   const isTimeframeSelectorRequired = allTimeframes.length > 1;
 
   const [selectedData, setSelectedData] = useState(chartData);
@@ -78,12 +82,19 @@ export const Chart = ({
       <header className="Chart__header">
         <div className="Chart__header__row">
           <div className="Chart__header__label">
-            <DetailsTooltip
-              details={header.description}
-              tooltipPosition={DetailsTooltip.tooltipPosition.left}
+            <Tooltip
+              position={Tooltip.position.TOP}
+              content={header.description}
             >
-              <span>{header.title}</span>
-            </DetailsTooltip>
+              <div className="Chart__header__title">
+                {header.title}
+                <IconButton
+                  icon={<Icon.Info />}
+                  altText="Details"
+                  customSize="1rem"
+                />
+              </div>
+            </Tooltip>
           </div>
           {isTimeframeSelectorRequired ? (
             <div className="Chart__header__timeframe">
@@ -111,8 +122,11 @@ export const Chart = ({
       <svg className="Chart__gradient_def">
         <defs>
           <linearGradient id="chartGradient" x1=".5" x2=".5" y2="1">
-            <stop stopColor={`rgba(${rgbStr}, 1.0)`} stopOpacity=".1" />
-            <stop offset="1.417" stopColor="#fff" stopOpacity="0" />
+            <stop
+              stopColor={getRgbaFromHex(theme.primaryColor, "1.0")}
+              stopOpacity=".1"
+            />
+            <stop offset="1.417" stopColor={theme.bgColor} stopOpacity="0" />
           </linearGradient>
         </defs>
       </svg>
@@ -124,8 +138,8 @@ export const Chart = ({
         >
           <VictoryAxis
             style={{
-              axis: { stroke: "#fff" },
-              tickLabels: { fill: "rgba(0, 0, 0, 0.6)" },
+              axis: { stroke: `${theme.bgColor}` },
+              tickLabels: { fill: `${theme.tickLabels}` },
             }}
           />
 
@@ -139,7 +153,7 @@ export const Chart = ({
               style={{
                 data: {
                   fill: "url(#chartGradient)",
-                  stroke: `rgba(${rgbStr}, 0.6)`,
+                  stroke: `${getRgbaFromHex(theme.primaryColor, "0.6")}`,
                 },
               }}
               data={selectedData}
