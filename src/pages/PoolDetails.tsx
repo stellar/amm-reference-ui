@@ -19,15 +19,13 @@ import { PoolStats } from "components/PoolStats";
 import { fetchPoolInfoAction, resetPoolInfoAction } from "ducks/poolInfo";
 import { useRedux } from "hooks/useRedux";
 
-export const PoolDetails = () => {
+export const PoolDetails = ({ isDarkMode }: { isDarkMode: boolean }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const { poolInfo, poolAvatars } = useRedux("poolInfo", "poolAvatars");
   const { poolHistory } = useRedux("poolHistory");
   const { poolId } = useParams<{ poolId: string }>();
-
-  console.log(poolAvatars);
 
   useEffect(() => {
     dispatch(fetchPoolInfoAction(poolId));
@@ -38,7 +36,6 @@ export const PoolDetails = () => {
       dispatch(resetPoolHistoryAction());
     };
   }, [dispatch, poolId]);
-  console.log(poolInfo);
 
   useEffect(() => {
     if (poolInfo.data?.reserves) {
@@ -85,7 +82,7 @@ export const PoolDetails = () => {
           avatars={poolAvatars.data}
         />{" "}
         <DataVisualizationGrid>
-          <DetailsChart poolHistory={poolHistory} />
+          <DetailsChart isDarkMode={isDarkMode} poolHistory={poolHistory} />
           <div>
             <PoolStats />
           </div>
