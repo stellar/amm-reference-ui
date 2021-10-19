@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import moment from "moment";
 import { Heading4, TextLink } from "@stellar/design-system";
+import { Card } from "components/Card";
 import { SortableTable } from "components/SortableTable";
 import { STELLAR_EXPERT_TX } from "constants/apiUrls";
 import { fetchPoolTransactionsAction } from "ducks/poolTransactions";
@@ -95,13 +96,14 @@ export const PoolTransactionsList = ({ poolId }: { poolId: string }) => {
   return (
     <div className="Section">
       <Heading4>Transactions</Heading4>
-
-      <SortableTable
-        data={poolTransactions.data}
-        columnLabels={labels}
-        renderItemRow={renderItemRow}
-        isLoading={poolTransactions.status === ActionStatus.PENDING}
-      />
+      <Card>
+        <SortableTable
+          data={poolTransactions.data}
+          columnLabels={labels}
+          renderItemRow={renderItemRow}
+          isLoading={poolTransactions.status === ActionStatus.PENDING}
+        />
+      </Card>
     </div>
   );
 };
