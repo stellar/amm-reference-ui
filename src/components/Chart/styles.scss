@@ -1,0 +1,75 @@
+.Chart {
+  --Chart-header-color: var(--pal-text-primary);
+
+  height: 100%;
+  width: 100%;
+
+  &__gradient_def {
+    height: 0;
+    position: absolute;
+    width: 0;
+  }
+
+  &__header {
+    &__row {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+    }
+    &__title {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        margin-left: 0.3rem;
+      }
+    }
+    &__values {
+      height: 2.625rem;
+    }
+
+    &__text {
+      color: var(--Chart-header-color);
+      font-size: 1.5rem;
+      font-weight: var(--font-weight-medium);
+      line-height: 2rem;
+      margin-bottom: 0;
+    }
+
+    &__note {
+      font-size: 0.75rem;
+      line-height: 1.25rem;
+
+      &--positive {
+        color: var(--pal-success);
+      }
+
+      &--negative {
+        color: var(--pal-error);
+      }
+    }
+
+    &__label {
+      font-size: var(--font-size);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5rem;
+    }
+    &__timeframe {
+      font-size: var(--font-size);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5rem;
+    }
+    &__button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: var(--font-size-secondary);
+      opacity: 0.4;
+      -webkit-appearance: none;
+      &--active {
+        opacity: 1;
+      }
+    }
+  }
+}

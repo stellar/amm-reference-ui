@@ -5,26 +5,35 @@ import { useDispatch } from "react-redux";
 import { Avatar } from "components/Avatar";
 import { AssetConversions } from "components/AssetConversions";
 import { Breadcrumbs } from "components/Breadcrumbs";
-import { PoolStats } from "components/PoolStats";
+import { DataVisualizationGrid } from "components/DataVisualizationGrid";
+import { DetailsChart } from "components/DetailsChart";
 import {
   fetchPoolAvatarsAction,
   resetPoolAvatarsAction,
 } from "ducks/poolAvatars";
+import {
+  fetchPoolHistoryAction,
+  resetPoolHistoryAction,
+} from "ducks/poolHistory";
+import { PoolStats } from "components/PoolStats";
 import { fetchPoolInfoAction, resetPoolInfoAction } from "ducks/poolInfo";
 import { useRedux } from "hooks/useRedux";
 
-export const PoolDetails = () => {
+export const PoolDetails = ({ isDarkMode }: { isDarkMode: boolean }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const { poolInfo, poolAvatars } = useRedux("poolInfo", "poolAvatars");
+  const { poolHistory } = useRedux("poolHistory");
   const { poolId } = useParams<{ poolId: string }>();
 
   useEffect(() => {
     dispatch(fetchPoolInfoAction(poolId));
+    dispatch(fetchPoolHistoryAction(poolId));
 
     return () => {
       dispatch(resetPoolInfoAction());
+      dispatch(resetPoolHistoryAction());
     };
   }, [dispatch, poolId]);
 
@@ -71,11 +80,13 @@ export const PoolDetails = () => {
         <AssetConversions
           reserves={poolInfo.data.reserves}
           avatars={poolAvatars.data}
-        />
-
-        <div>
-          <PoolStats />
-        </div>
+        />{" "}
+        <DataVisualizationGrid>
+          <DetailsChart isDarkMode={isDarkMode} poolHistory={poolHistory} />
+          <div>
+            <PoolStats />
+          </div>
+        </DataVisualizationGrid>
       </Layout.Inset>
     </div>
   );

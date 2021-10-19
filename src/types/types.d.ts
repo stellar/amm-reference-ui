@@ -18,6 +18,7 @@ export interface RejectMessage {
 // Store
 export interface Store {
   poolAvatars: PoolAvatarsInitialState;
+  poolHistory: PoolHistoryInitialState;
   poolInfo: PoolInfoInitialState;
   poolStats: PoolStatsInitialState;
   poolTransactions: PoolTransactionsInitialState;
@@ -43,6 +44,12 @@ export interface PoolStatsInitialState {
 }
 export interface PoolTransactionsInitialState {
   data: LiquidityPoolTransaction[];
+  status: ActionStatus | undefined;
+  errorString?: string;
+}
+
+export interface PoolHistoryInitialState {
+  data: LiquidityPoolHistory[];
   status: ActionStatus | undefined;
   errorString?: string;
 }
@@ -89,6 +96,12 @@ export interface LiquidityPoolTransaction {
   type: string;
 }
 
+export type LiquidityPoolHistory = {
+  ts: number;
+  /* eslint-disable camelcase */
+  total_value_locked: string;
+  /* eslint-enable camelcase */
+};
 export interface AssetAvatar {
   altText: string;
   iconUrl: string | undefined;
@@ -112,4 +125,10 @@ export interface LiquidityPoolStats {
   totalValueLocked: string;
   tradesCount: number | string;
   volume: LiquidityPoolAssetInterval[];
+}
+
+// Chart
+export interface ChartData {
+  x: string;
+  y: number;
 }
