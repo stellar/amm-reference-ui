@@ -7,6 +7,7 @@ import { AssetConversions } from "components/AssetConversions";
 import { Breadcrumbs } from "components/Breadcrumbs";
 import { DataVisualizationGrid } from "components/DataVisualizationGrid";
 import { DetailsChart } from "components/DetailsChart";
+import { PoolTransactionsList } from "components/PoolTransactionsList";
 import {
   fetchPoolAvatarsAction,
   resetPoolAvatarsAction,
@@ -87,6 +88,7 @@ export const PoolDetails = ({ isDarkMode }: { isDarkMode: boolean }) => {
             <PoolStats />
           </div>
         </DataVisualizationGrid>
+        <PoolTransactionsList poolId={poolId} />
       </Layout.Inset>
     </div>
   );
