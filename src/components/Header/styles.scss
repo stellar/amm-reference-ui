@@ -1,0 +1,34 @@
+.Layout__header {
+  .Layout__inset {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+
+    & > div {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+
+  .NavButton {
+    margin-right: -0.8rem;
+  }
+
+  &--left {
+    justify-content: flex-start;
+  }
+
+  &--center {
+    justify-content: center;
+    flex-grow: 1;
+
+    @media (max-width: 900px) {
+      min-width: 100%;
+      order: 1;
+    }
+  }
+
+  &--right {
+    justify-content: flex-end;
+  }
+}
