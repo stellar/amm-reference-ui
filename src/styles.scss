@@ -2,15 +2,16 @@
   // TODO: add to SDS color palette (same for dark and light theme)
   --pal-background-tooltip: #191b25;
 
-  // TODO: add hide title prop in SDS
-  .ProjectLogo__title {
-    display: none;
-  }
-
   // Making it default for now
   .Avatar {
     --Avatar-image-size: 100%;
   }
+}
+
+// TODO: update in SDS
+// screen sizes below 360px are small % now (< 8%) https://worship.agency/mobile-screen-sizes-for-2021
+body {
+  --layout-window-width-min: 360px;
 }
 
 .Section {

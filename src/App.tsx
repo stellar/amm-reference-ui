@@ -5,11 +5,13 @@ import { Layout } from "@stellar/design-system";
 
 import { store } from "config/store";
 import { Header } from "components/Header";
+import { NetworkIndicator } from "components/NetworkIndicator";
 import { FooterWithNote } from "components/FooterWithNote";
 
 import { PoolsOverview } from "pages/PoolsOverview";
 import { PoolDetails } from "pages/PoolDetails";
 import { NotFound } from "pages/NotFound";
+import { StellarNetwork } from "types/types.d";
 
 import "styles.scss";
 
@@ -25,7 +27,15 @@ export const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Header setIsDarkMode={setIsDarkMode} />
+        <Header
+          projectTitle="AMM Reference UI"
+          projectLink="https://stellar.org"
+          hasDarkModeToggle
+          onDarkModeToggleEnd={() => {
+            setIsDarkMode(isDarkMode);
+          }}
+          contentRight={<NetworkIndicator network={StellarNetwork.testnet} />}
+        />
 
         <Layout.Content>
           <Switch>
