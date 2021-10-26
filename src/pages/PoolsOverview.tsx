@@ -1,5 +1,8 @@
 import { Layout } from "@stellar/design-system";
+import { AllPools } from "components/AllPools";
 
 export const PoolsOverview = () => (
-  <Layout.Inset>Pools overview page</Layout.Inset>
+  <Layout.Inset>
+    <AllPools />
+  </Layout.Inset>
 );
