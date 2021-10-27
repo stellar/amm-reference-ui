@@ -1,7 +1,8 @@
 // TODO: move to SDS
-import React, { useLayoutEffect, useState } from "react";
-import { sortBy } from "lodash";
+import React, { useCallback, useLayoutEffect, useState } from "react";
+import { sortBy, chunk } from "lodash";
 import { Icon, Loader } from "@stellar/design-system";
+import { Pagination } from "components/Pagination";
 import "./styles.scss";
 
 interface TableColumnLabel {
@@ -17,6 +18,7 @@ interface SortableTableProps<DataItem> {
   hideNumberColumn?: boolean;
   isLoading?: boolean;
   emptyMessage?: string;
+  pageSize?: number;
 }
 
 enum SortOrder {
@@ -33,14 +35,22 @@ export const SortableTable = <DataItem,>({
   hideNumberColumn,
   isLoading,
   emptyMessage = "No transactions to show",
+  pageSize,
 }: SortableTableProps<DataItem>) => {
-  const [localData, setLocalData] = useState(data);
+  const chunkData = useCallback(
+    (items: DataItem[]) => chunk(items, pageSize || items.length),
+    [pageSize],
+  );
+
+  const [localData, setLocalData] = useState<DataItem[][]>(chunkData(data));
   const [currentSortKey, setCurrentSortKey] = useState<string | null>(null);
   const [sortOrder, setSortOder] = useState<SortOrder | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useLayoutEffect(() => {
-    setLocalData(data);
-  }, [data]);
+    const chunkedData = chunkData(data);
+    setLocalData(chunkedData);
+  }, [data, pageSize, chunkData]);
 
   const handleSort = (sortKey: string) => {
     let sortedData = data;
@@ -64,7 +74,7 @@ export const SortableTable = <DataItem,>({
     }
 
     setCurrentSortKey(sortedKey);
-    setLocalData(sortedData);
+    setLocalData(chunkData(sortedData));
     setSortOder(sortedOrder);
   };
 
@@ -83,8 +93,6 @@ export const SortableTable = <DataItem,>({
 
     return null;
   };
-
-  // TODO: add pagination
 
   return (
     <div
@@ -114,7 +122,7 @@ export const SortableTable = <DataItem,>({
             </tr>
           </thead>
           <tbody>
-            {localData.map((item, index) => (
+            {localData[currentPage - 1].map((item, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <tr key={`row-${index}`}>
                 {hideNumberColumn ? null : <td>{index + 1}</td>}
@@ -123,6 +131,15 @@ export const SortableTable = <DataItem,>({
             ))}
           </tbody>
         </table>
+      ) : null}
+
+      {pageSize ? (
+        <Pagination
+          pageSize={pageSize}
+          itemCount={data.length}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       ) : null}
 
       {isLoading ? <Loader size="3rem" /> : null}
