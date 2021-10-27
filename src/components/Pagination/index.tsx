@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Icon, IconButton } from "@stellar/design-system";
 import "./styles.scss";
 
@@ -10,16 +9,16 @@ enum NavigationDirection {
 interface PaginationProps {
   pageSize: number;
   itemCount: number;
-  onPageChangeDone: (currentPage: number) => void;
+  currentPage: number;
+  setCurrentPage: (currentPage: number) => void;
 }
 
 export const Pagination = ({
   pageSize,
   itemCount,
-  onPageChangeDone,
+  currentPage,
+  setCurrentPage,
 }: PaginationProps) => {
-  const [currentPage, setCurrentPage] = useState(1);
-
   if (!pageSize || !itemCount) {
     return null;
   }
@@ -34,7 +33,6 @@ export const Pagination = ({
         ? currentPage - 1
         : currentPage + 1;
     setCurrentPage(newPage);
-    onPageChangeDone(newPage);
   };
 
   const customProps = {

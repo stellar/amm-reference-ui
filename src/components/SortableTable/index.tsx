@@ -78,10 +78,6 @@ export const SortableTable = <DataItem,>({
     setSortOder(sortedOrder);
   };
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
   const renderSortIcon = (sortKey: string) => {
     if (sortKey === currentSortKey && sortOrder) {
       return (
@@ -141,7 +137,8 @@ export const SortableTable = <DataItem,>({
         <Pagination
           pageSize={pageSize}
           itemCount={data.length}
-          onPageChangeDone={handlePageChange}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         />
       ) : null}
 
