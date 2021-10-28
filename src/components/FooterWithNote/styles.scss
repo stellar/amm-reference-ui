@@ -3,7 +3,10 @@
 
   &__note {
     text-align: center;
-    font-size: var(--font-size-primary);
-    color: var(--pal-text-secondary);
+    font-size: var(--font-size-secondary);
+    color: var(--pal-text-tertiary);
+    line-height: 1.4rem;
+    max-width: 900px;
+    margin: 0 auto;
   }
 }
