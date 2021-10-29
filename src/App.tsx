@@ -28,8 +28,8 @@ export const App = () => {
     <Provider store={store}>
       <Router>
         <Header
-          projectTitle="AMM Reference UI"
-          projectLink="https://stellar.org"
+          projectTitle="AMM Demo"
+          projectLink="https://amm-demo.stellar.org"
           hasDarkModeToggle
           onDarkModeToggleEnd={() => {
             setIsDarkMode(isDarkMode);
