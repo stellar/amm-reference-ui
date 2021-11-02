@@ -42,7 +42,10 @@ export const AssetConversions = ({
       num = Number(reserves[1].amount) / Number(reserves[0].amount);
     }
 
-    return `${formatConversion(num)} ${getAssetCode(reserves[index].asset)}`;
+    return `${formatConversion(num)} ${getAssetCode(
+      reserves[index].asset,
+      "-",
+    )}`;
   };
 
   const Asset = ({ fromAsset, toAsset, avatar }: AssetProps) => (
@@ -52,7 +55,7 @@ export const AssetConversions = ({
       ) : (
         <AssetAvatar assets={[fromAsset.asset]} />
       )}
-      <span>{`1 ${getAssetCode(fromAsset.asset)} = ${getConversion(
+      <span>{`1 ${getAssetCode(fromAsset.asset, "-")} = ${getConversion(
         toAsset,
       )}`}</span>
     </div>
