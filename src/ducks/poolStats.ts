@@ -13,7 +13,7 @@ export const fetchPoolStatsAction = createAsyncThunk<
   LiquidityPoolStats,
   string,
   { rejectValue: RejectMessage; state: RootState }
->("poolAvatars/fetchPoolStatsAction", async (poolId, { rejectWithValue }) => {
+>("poolStats/fetchPoolStatsAction", async (poolId, { rejectWithValue }) => {
   let poolStats = null;
 
   try {

@@ -6,7 +6,7 @@ export const fetchPoolStats = async (
   poolId: string,
 ): Promise<LiquidityPoolStats> => {
   const response = await fetch(
-    `${STELLAR_EXPERT_AMM_URL}/pool/${poolId}/stats`,
+    `${STELLAR_EXPERT_AMM_URL}/liquidity-pool/${poolId}`,
   );
   const data = await response.json();
 

@@ -6,7 +6,7 @@ interface FetchPoolHistoryProps {
 
 export const fetchPoolHistory = async ({ poolId }: FetchPoolHistoryProps) => {
   const historyResponse = await fetch(
-    `${STELLAR_EXPERT_AMM_URL}/pool/${poolId}/history`,
+    `${STELLAR_EXPERT_AMM_URL}/liquidity-pool/${poolId}/stats-history`,
   );
 
   const history = await historyResponse.json();
