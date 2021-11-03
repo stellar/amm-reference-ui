@@ -9,10 +9,7 @@ import BigNumber from "bignumber.js";
 
 import { RESET_STORE_ACTION_TYPE } from "constants/settings";
 
-<<<<<<< HEAD
 import { reducer as aggregatedPools } from "ducks/aggregatedPools";
-=======
->>>>>>> c804f98da40f4ee1b17b41d8ee9b54ca1d75bf53
 import { reducer as poolDetails } from "ducks/poolDetails";
 import { reducer as poolTransactions } from "ducks/poolTransactions";
 import { reducer as poolHistory } from "ducks/poolHistory";
