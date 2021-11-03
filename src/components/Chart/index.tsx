@@ -70,12 +70,30 @@ export const Chart = ({
     return null;
   }
 
-  const chartNote = chartData[0].y - chartData[1].y;
-  const isChartNoteNegative = chartNote < 0;
-  const chartNotePercentage = (
-    (Math.abs(chartNote) / chartData[1].y) *
-    100
-  ).toFixed(2);
+  const renderChartNotePercentage = () => {
+    // Nothing to compare if there is only one data point
+    if (chartData.length === 1) {
+      return null;
+    }
+
+    const chartNote = chartData[0].y - chartData[1].y;
+    const isChartNoteNegative = chartNote < 0;
+    const chartNotePercentage = (
+      (Math.abs(chartNote) / chartData[1].y) *
+      100
+    ).toFixed(2);
+
+    return (
+      <div
+        className={`Chart__header__note Chart__header__note--${
+          isChartNoteNegative ? "negative" : "positive"
+        }
+`}
+      >
+        ${formatAmount(chartNote)} ({chartNotePercentage}%)
+      </div>
+    );
+  };
 
   return (
     <section className="Chart" style={customStyle}>
@@ -107,14 +125,7 @@ export const Chart = ({
             <div className="Chart__header__text">
               ${formatAmount(chartData[0].y)}
             </div>
-            <div
-              className={`Chart__header__note Chart__header__note--${
-                isChartNoteNegative ? "negative" : "positive"
-              }
-        `}
-            >
-              ${formatAmount(chartNote)} ({chartNotePercentage}%)
-            </div>
+            {renderChartNotePercentage()}
           </div>
         </div>
       </header>

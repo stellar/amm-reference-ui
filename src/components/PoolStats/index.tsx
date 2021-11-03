@@ -38,8 +38,7 @@ export const PoolStats = () => {
       return `${formatConversion(asset.amount)} ${asset.assetCode}`;
     }
 
-    // This is unlikely
-    return "";
+    return `0 ${asset.assetCode}`;
   };
 
   if (!poolDetails.data) {
