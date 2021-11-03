@@ -12,6 +12,7 @@ import { useRedux } from "hooks/useRedux";
 export const PoolsOverview = () => {
   const dispatch = useDispatch();
   const { aggregatedPools } = useRedux("aggregatedPools");
+
   useEffect(() => {
     dispatch(fetchAggregatedPoolsAction());
 
@@ -19,6 +20,7 @@ export const PoolsOverview = () => {
       dispatch(resetAggregatedPoolsAction());
     };
   }, [dispatch]);
+
   return (
     <Layout.Inset>
       <TopList aggregatedPoolData={aggregatedPools.data} />

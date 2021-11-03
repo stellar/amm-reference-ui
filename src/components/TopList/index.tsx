@@ -11,21 +11,35 @@ interface TopListProps {
   aggregatedPoolData: LiquidityPoolDetails[];
 }
 
+const MAX_LENGTH = 5;
+
 export const TopList = ({ aggregatedPoolData }: TopListProps) => {
   const [topPools, setTopPools] = useState([] as LiquidityPoolDetails[]);
+  const LIST_LENGTH =
+    aggregatedPoolData.length >= MAX_LENGTH
+      ? MAX_LENGTH
+      : aggregatedPoolData.length;
+  const hasMultiplePools = LIST_LENGTH > 1;
+
   useEffect(() => {
     setTopPools(
-      [...aggregatedPoolData].sort((a, b) => {
-        if (a.totalValueLocked > b.totalValueLocked) {
-          return -1;
-        }
-        if (a.totalValueLocked < b.totalValueLocked) {
-          return 1;
-        }
-        return 0;
-      }),
+      [...aggregatedPoolData]
+        .sort((a, b) => {
+          if (a.totalValueLocked > b.totalValueLocked) {
+            return -1;
+          }
+          if (a.totalValueLocked < b.totalValueLocked) {
+            return 1;
+          }
+          return 0;
+        })
+        .slice(0, LIST_LENGTH),
     );
-  }, [aggregatedPoolData]);
+  }, [aggregatedPoolData, LIST_LENGTH]);
+
+  if (!topPools.length) {
+    return null;
+  }
 
   return (
     <Card>
@@ -48,7 +62,8 @@ export const TopList = ({ aggregatedPoolData }: TopListProps) => {
         </div>
         <div>
           <div className="TopList__header">
-            Top 5 Pools{" "}
+            Top {hasMultiplePools ? `${LIST_LENGTH} ` : ""} Pool
+            {hasMultiplePools ? "s" : ""}{" "}
             <Tooltip
               position={Tooltip.position.TOP}
               content="The pools with the greatest number of participants."
@@ -62,7 +77,10 @@ export const TopList = ({ aggregatedPoolData }: TopListProps) => {
           </div>
           <div className="TopList__pool__row">
             {topPools.map((pool) => (
-              <div className="TopList__pool__row__item">
+              <div
+                className="TopList__pool__row__item"
+                key={`${pool.assetCodes[0]}-${pool.assetCodes[1]}`}
+              >
                 <Avatar source={pool.assetAvatars} size="1.5rem" />
                 <span>
                   {pool.assetCodes[0]}-{pool.assetCodes[1]}

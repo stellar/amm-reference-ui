@@ -274,6 +274,55 @@ export const handlers = [
               created: 1635747708,
               updated: 1635747783,
             },
+            {
+              id: "b0e620b928aa23f8b42200d188cf97df8455484d30c8e1c5ade4015deee3c39c",
+              paging_token:
+                "b0e620b928aa23f8b42200d188cf97df8455484d30c8e1c5ade4015deee3c39c",
+              assets: [
+                {
+                  asset:
+                    "TBN-GCO47UX6AINCBVPNXIIDPWL33D6QWGUA4RBXSQWQXF75KTX7QJK3ZBD2-1",
+                  amount: "4700000000",
+                },
+                {
+                  asset:
+                    "TUS-GCO47UX6AINCBVPNXIIDPWL33D6QWGUA4RBXSQWQXF75KTX7QJK3ZBD2-1",
+                  amount: "2278809080665",
+                },
+              ],
+              type: 0,
+              fee: 30,
+              shares: "103490415015",
+              accounts: 1,
+              trades: 3,
+              total_value_locked: "0",
+              earned_fees: [
+                {
+                  asset:
+                    "TBN-GCO47UX6AINCBVPNXIIDPWL33D6QWGUA4RBXSQWQXF75KTX7QJK3ZBD2-1",
+                  all_time: 30000,
+                },
+                {
+                  asset:
+                    "TUS-GCO47UX6AINCBVPNXIIDPWL33D6QWGUA4RBXSQWQXF75KTX7QJK3ZBD2-1",
+                  all_time: 14471071,
+                },
+              ],
+              volume: [
+                {
+                  asset:
+                    "TBN-GCO47UX6AINCBVPNXIIDPWL33D6QWGUA4RBXSQWQXF75KTX7QJK3ZBD2-1",
+                  all_time: 20000000,
+                },
+                {
+                  asset:
+                    "TUS-GCO47UX6AINCBVPNXIIDPWL33D6QWGUA4RBXSQWQXF75KTX7QJK3ZBD2-1",
+                  all_time: 9676461263,
+                },
+              ],
+              created: 1635094799,
+              updated: 1635213542,
+            },
           ],
         },
       }),
