@@ -17,6 +17,7 @@ export interface RejectMessage {
 
 // Store
 export interface Store {
+  aggregatedPools: AggregatedPoolsInitialState;
   poolAvatars: PoolAvatarsInitialState;
   poolHistory: PoolHistoryInitialState;
   poolInfo: PoolInfoInitialState;
@@ -25,6 +26,12 @@ export interface Store {
 }
 
 export type StoreKey = keyof Store;
+
+export interface AggregatedPoolsInitialState {
+  data: LiquidityPoolStats[];
+  status: ActionStatus | undefined;
+  errorString?: string;
+}
 
 export interface PoolAvatarsInitialState {
   data: AssetAvatar[];
@@ -57,21 +64,26 @@ export interface PoolHistoryInitialState {
 export interface LiquidityPoolAsset {
   asset: string;
   assetCode?: string;
-  amount?: string;
-  "24h"?: string;
-  "7d"?: string;
-  "1y"?: string;
+  amount?: string | number;
+  "24h"?: string | number;
+  "7d"?: string | number;
+  "1y"?: string | number;
+  // eslint-disable-next-line camelcase
+  all_time?: string | number;
 }
 
 // Liquidity pool
 export interface LiquidityPoolReserve extends LiquidityPoolAsset {
-  amount: string;
+  amount: string | number;
 }
 
 export interface LiquidityPoolAssetInterval extends LiquidityPoolAsset {
-  "24h": string;
-  "7d": string;
-  "1y": string;
+  // TODO: put these back once available
+  // "24h": string | number;
+  // "7d": string | number;
+  // "1y": string | number;
+  // eslint-disable-next-line camelcase
+  all_time: string | number;
 }
 export interface LiquidityPoolOperation {
   [key: string]: any;
@@ -120,10 +132,13 @@ export interface LiquidityPoolStats {
   id: string;
   assets: LiquidityPoolReserve[];
   earnedFees: LiquidityPoolAssetInterval[];
-  fee: number | string;
-  shares: string;
+  fee: number;
+  assetCodes: string[];
+  assetAvatars: AssetAvatar[];
+  totalShares: string;
+  totalAccounts: string;
+  totalTrades: string;
   totalValueLocked: string;
-  tradesCount: number | string;
   volume: LiquidityPoolAssetInterval[];
 }
 
