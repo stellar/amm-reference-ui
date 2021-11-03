@@ -43,7 +43,7 @@ const getAvatarData = (assets: Asset[]) =>
     iconUrl: a?.toml_info?.image,
   }));
 
-export const formatAggregatedPool = (data: any) => ({
+export const formatPool = (data: any) => ({
   id: data.id,
   assets: formatAssets(data.assets),
   assetCodes: getReserveAssets(data.assets),
