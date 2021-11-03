@@ -1,8 +1,9 @@
 // TODO: move to SDS
 import React, { useCallback, useLayoutEffect, useState } from "react";
-import { sortBy, chunk } from "lodash";
+import { chunk } from "lodash";
 import { Icon, Loader } from "@stellar/design-system";
 import { Pagination } from "components/Pagination";
+import { sortList } from "helpers/sortList";
 import "./styles.scss";
 
 interface TableColumnLabel {
@@ -62,7 +63,7 @@ export const SortableTable = <DataItem,>({
       if (sortOrder === SortOrder.asc) {
         // second click: desc order
         sortedOrder = SortOrder.desc;
-        sortedData = sortBy(data, [sortKey]).reverse();
+        sortedData = sortList(data, sortKey, "desc");
       } else {
         // third click: clear sort
         sortedKey = null;
@@ -70,7 +71,7 @@ export const SortableTable = <DataItem,>({
     } else {
       // first click: asc order
       sortedOrder = SortOrder.asc;
-      sortedData = sortBy(data, [sortKey]);
+      sortedData = sortList(data, sortKey);
     }
 
     setCurrentSortKey(sortedKey);
