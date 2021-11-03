@@ -29,7 +29,7 @@ export const TopList = ({ aggregatedPoolData }: TopListProps) => {
 
   return (
     <Card>
-      <section className="TopList">
+      <div className="TopList">
         <div>
           <div className="TopList__header">
             <span>Pools</span>{" "}
@@ -71,7 +71,7 @@ export const TopList = ({ aggregatedPoolData }: TopListProps) => {
             ))}
           </div>
         </div>
-      </section>
+      </div>
     </Card>
   );
 };
