@@ -9,52 +9,41 @@ import { DataVisualizationGrid } from "components/DataVisualizationGrid";
 import { DetailsChart } from "components/DetailsChart";
 import { PoolTransactionsList } from "components/PoolTransactionsList";
 import {
-  fetchPoolAvatarsAction,
-  resetPoolAvatarsAction,
-} from "ducks/poolAvatars";
+  fetchPoolDetailsAction,
+  resetPoolDetailsAction,
+} from "ducks/poolDetails";
 import {
   fetchPoolHistoryAction,
   resetPoolHistoryAction,
 } from "ducks/poolHistory";
 import { PoolStats } from "components/PoolStats";
-import { fetchPoolInfoAction, resetPoolInfoAction } from "ducks/poolInfo";
 import { useRedux } from "hooks/useRedux";
 
 export const PoolDetails = ({ isDarkMode }: { isDarkMode: boolean }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { poolInfo, poolAvatars } = useRedux("poolInfo", "poolAvatars");
+  const { poolDetails } = useRedux("poolDetails");
   const { poolHistory } = useRedux("poolHistory");
   const { poolId } = useParams<{ poolId: string }>();
 
   useEffect(() => {
-    dispatch(fetchPoolInfoAction(poolId));
+    dispatch(fetchPoolDetailsAction(poolId));
     dispatch(fetchPoolHistoryAction(poolId));
 
     return () => {
-      dispatch(resetPoolInfoAction());
+      dispatch(resetPoolDetailsAction());
       dispatch(resetPoolHistoryAction());
     };
   }, [dispatch, poolId]);
-
-  useEffect(() => {
-    if (poolInfo.data?.reserves) {
-      dispatch(fetchPoolAvatarsAction(poolInfo.data.reserves));
-    }
-
-    return () => {
-      dispatch(resetPoolAvatarsAction());
-    };
-  }, [dispatch, poolInfo.data?.reserves]);
 
   const handleRouteClick = (route: string) => {
     history.push(route);
   };
 
-  const getAssetPairString = () => poolInfo.data?.reserveAssets.join(" / ");
+  const getAssetPairString = () => poolDetails.data?.assetCodes.join(" / ");
 
-  if (!poolInfo.data) {
+  if (!poolDetails.data) {
     return null;
   }
 
@@ -75,12 +64,12 @@ export const PoolDetails = ({ isDarkMode }: { isDarkMode: boolean }) => {
           onClick={handleRouteClick}
         />
         <div className="PoolDetails__title">
-          <Avatar source={poolAvatars.data} />
+          <Avatar source={poolDetails.data.assetAvatars} />
           <Heading2>{getAssetPairString()}</Heading2>
         </div>
         <AssetConversions
-          reserves={poolInfo.data.reserves}
-          avatars={poolAvatars.data}
+          reserves={poolDetails.data.assets}
+          avatars={poolDetails.data.assetAvatars}
         />{" "}
         <DataVisualizationGrid>
           <DetailsChart isDarkMode={isDarkMode} poolHistory={poolHistory} />

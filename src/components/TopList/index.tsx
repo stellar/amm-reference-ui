@@ -3,16 +3,16 @@ import { IconButton, Icon } from "@stellar/design-system";
 import { Avatar } from "components/Avatar";
 import { Card } from "components/Card";
 import { Tooltip } from "components/Tooltip";
-import { LiquidityPoolStats } from "types/types.d";
+import { LiquidityPoolDetails } from "types/types.d";
 
 import "./styles.scss";
 
 interface TopListProps {
-  aggregatedPoolData: LiquidityPoolStats[];
+  aggregatedPoolData: LiquidityPoolDetails[];
 }
 
 export const TopList = ({ aggregatedPoolData }: TopListProps) => {
-  const [topPools, setTopPools] = useState([] as LiquidityPoolStats[]);
+  const [topPools, setTopPools] = useState([] as LiquidityPoolDetails[]);
   useEffect(() => {
     setTopPools(
       [...aggregatedPoolData].sort((a, b) => {
