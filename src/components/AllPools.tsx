@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Heading4 } from "@stellar/design-system";
 import { Card } from "components/Card";
 import { SortableTable } from "components/SortableTable";
@@ -9,37 +10,68 @@ interface AllPoolsProps {
   aggregatedPoolData: LiquidityPoolDetails[];
 }
 
+interface PoolTableData {
+  assetCodes: string[];
+  name: string;
+  liquidity: string;
+  fees: string[];
+}
+
 export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
+  const [poolTableData, setPoolTableData] = useState([] as PoolTableData[]);
+
+  useEffect(() => {
+    setPoolTableData(
+      [...aggregatedPoolData].map(
+        ({ assetCodes, earnedFees, totalShares }) => ({
+          assetCodes,
+          name: getPoolName(assetCodes[0], assetCodes[1]),
+          liquidity: totalShares,
+          fees: [`${earnedFees[0].all_time}`, `${earnedFees[0].all_time}`],
+        }),
+      ),
+    );
+  }, [aggregatedPoolData]);
+
   const labels = [
     {
-      id: "poolName",
+      id: "name",
       label: "Name",
       sortBy: true,
     },
     {
-      id: "totalShares",
+      id: "liquidity",
       label: "Liquidity",
       sortBy: true,
     },
     {
-      id: "pool.earnedFees[0].fees",
+      id: "fees[0]",
       label: "Fees (24HR)",
+      sortBy: true,
     },
     {
-      id: "pool.earnedFees[1].fees",
+      id: "fees[1]",
       label: "Fees (24HR)",
+      sortBy: true,
     },
   ];
 
-  const renderItemRow = (pool: LiquidityPoolDetails) => (
+  const renderItemRow = ({
+    assetCodes,
+    name,
+    liquidity,
+    fees,
+  }: PoolTableData) => (
     <>
-      <td>{getPoolName(pool.assetCodes[0], pool.assetCodes[1])}</td>
-      <td>{formatAmount(pool.totalShares)}</td>
+      <td>{name}</td>
+      <td>{formatAmount(liquidity)}</td>
       <td>
-        {`${formatAmount(pool.earnedFees[0].all_time)}${pool.assetCodes[0]}`}
+        {formatAmount(fees[0])}
+        {assetCodes[0]}
       </td>
       <td>
-        {`${formatAmount(pool.earnedFees[1].all_time)}${pool.assetCodes[1]}`}
+        {formatAmount(fees[1])}
+        {assetCodes[1]}
       </td>
     </>
   );
@@ -49,7 +81,7 @@ export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
       <Heading4>All Liquidity Pools</Heading4>
       <Card>
         <SortableTable
-          data={aggregatedPoolData}
+          data={poolTableData}
           columnLabels={labels}
           renderItemRow={renderItemRow}
           pageSize={5}
