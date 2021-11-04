@@ -25,15 +25,7 @@ export const TopList = ({ aggregatedPoolData }: TopListProps) => {
   useEffect(() => {
     setTopPools(
       [...aggregatedPoolData]
-        .sort((a, b) => {
-          if (a.totalValueLocked > b.totalValueLocked) {
-            return -1;
-          }
-          if (a.totalValueLocked < b.totalValueLocked) {
-            return 1;
-          }
-          return 0;
-        })
+        .sort((a, b) => Number(b.totalValueLocked) - Number(a.totalValueLocked))
         .slice(0, LIST_LENGTH),
     );
   }, [aggregatedPoolData, LIST_LENGTH]);

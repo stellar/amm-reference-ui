@@ -27,7 +27,6 @@ export const PoolTransactionsList = ({ poolId }: { poolId: string }) => {
     {
       id: "id",
       label: "Transaction",
-      sortBy: true,
     },
     // TODO: using shares for now. We probably need to fetch current prices to
     // calculate total value.
@@ -37,12 +36,12 @@ export const PoolTransactionsList = ({ poolId }: { poolId: string }) => {
       sortBy: true,
     },
     {
-      id: "item.reserves[0].amount",
+      id: "reserves[0].amount",
       label: "Amount",
       sortBy: true,
     },
     {
-      id: "item.reserves[1].amount",
+      id: "reserves[1].amount",
       label: "Amount",
       sortBy: true,
     },
@@ -81,7 +80,6 @@ export const PoolTransactionsList = ({ poolId }: { poolId: string }) => {
   const renderItemRow = (item: LiquidityPoolTransaction) => (
     <>
       <td>
-        {/* TODO: broken URL, update when ready */}
         <TextLink href={`${STELLAR_EXPERT_TX}/${item.transactionHash}`}>
           {getTransactionLabel(item)}
         </TextLink>
