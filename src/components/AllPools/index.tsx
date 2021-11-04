@@ -77,7 +77,7 @@ export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
       <td>
         {formatAmount(fees[0])} {assetCodes[0]}
       </td>
-      <td>
+      <td className="AllPools__adjustedRow">
         {formatAmount(fees[1])} {assetCodes[1]}
       </td>
     </>
