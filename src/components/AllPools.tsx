@@ -66,12 +66,10 @@ export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
       <td>{name}</td>
       <td>{formatAmount(liquidity)}</td>
       <td>
-        {formatAmount(fees[0])}
-        {assetCodes[0]}
+        {formatAmount(fees[0])} {assetCodes[0]}
       </td>
       <td>
-        {formatAmount(fees[1])}
-        {assetCodes[1]}
+        {formatAmount(fees[1])} {assetCodes[1]}
       </td>
     </>
   );
