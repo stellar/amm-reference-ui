@@ -3,6 +3,7 @@ import { IconButton, Icon } from "@stellar/design-system";
 import { Avatar } from "components/Avatar";
 import { Card } from "components/Card";
 import { Tooltip } from "components/Tooltip";
+import { getPoolName } from "helpers/getPoolName";
 import { LiquidityPoolDetails } from "types/types.d";
 
 import "./styles.scss";
@@ -79,11 +80,11 @@ export const TopList = ({ aggregatedPoolData }: TopListProps) => {
             {topPools.map((pool) => (
               <div
                 className="TopList__pool__row__item"
-                key={`${pool.assetCodes[0]}-${pool.assetCodes[1]}`}
+                key={getPoolName(pool.assetCodes[0], pool.assetCodes[1])}
               >
                 <Avatar source={pool.assetAvatars} size="1.5rem" />
                 <span>
-                  {pool.assetCodes[0]}-{pool.assetCodes[1]}
+                  {getPoolName(pool.assetCodes[0], pool.assetCodes[1])}
                 </span>
               </div>
             ))}

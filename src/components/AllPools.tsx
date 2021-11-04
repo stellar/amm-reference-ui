@@ -1,50 +1,46 @@
 import { Heading4 } from "@stellar/design-system";
 import { Card } from "components/Card";
 import { SortableTable } from "components/SortableTable";
+import { formatAmount } from "helpers/formatAmount";
+import { getPoolName } from "helpers/getPoolName";
+import { LiquidityPoolDetails } from "types/types.d";
 
-const testData = [
-  {
-    id: 1,
-    label: "test1",
-  },
-  {
-    id: 2,
-    label: "test2",
-  },
-  {
-    id: 3,
-    label: "test3",
-  },
-  {
-    id: 4,
-    label: "test4",
-  },
-  {
-    id: 5,
-    label: "test5",
-  },
-  {
-    id: 6,
-    label: "test6",
-  },
-];
+interface AllPoolsProps {
+  aggregatedPoolData: LiquidityPoolDetails[];
+}
 
-export const AllPools = () => {
+export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
   const labels = [
     {
-      id: "id",
-      label: "ID",
+      id: "poolName",
+      label: "Name",
+      sortBy: true,
     },
     {
-      id: "label",
-      label: "Label",
+      id: "totalShares",
+      label: "Liquidity",
+      sortBy: true,
+    },
+    {
+      id: "pool.earnedFees[0].fees",
+      label: "Fees (24HR)",
+    },
+    {
+      id: "pool.earnedFees[1].fees",
+      label: "Fees (24HR)",
     },
   ];
 
-  const renderItemRow = (item: any) => (
+  const renderItemRow = (pool: LiquidityPoolDetails) => (
     <>
-      <td>{item.id}</td>
-      <td>{item.label}</td>
+      <td>{getPoolName(pool.assetCodes[0], pool.assetCodes[1])}</td>
+      <td>{formatAmount(pool.totalShares)}</td>
+      <td>
+        {`${formatAmount(pool.earnedFees[0].all_time)}${pool.assetCodes[0]}`}
+      </td>
+      <td>
+        {`${formatAmount(pool.earnedFees[1].all_time)}${pool.assetCodes[1]}`}
+      </td>
     </>
   );
 
@@ -53,7 +49,7 @@ export const AllPools = () => {
       <Heading4>All Liquidity Pools</Heading4>
       <Card>
         <SortableTable
-          data={testData}
+          data={aggregatedPoolData}
           columnLabels={labels}
           renderItemRow={renderItemRow}
           pageSize={5}
