@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import { Heading4 } from "@stellar/design-system";
+import { Avatar } from "components/Avatar";
 import { Card } from "components/Card";
 import { SortableTable } from "components/SortableTable";
 import { formatAmount } from "helpers/formatAmount";
 import { getPoolName } from "helpers/getPoolName";
-import { LiquidityPoolDetails } from "types/types.d";
+import { AssetAvatar, LiquidityPoolDetails } from "types/types.d";
+
+import "./styles.scss";
 
 interface AllPoolsProps {
   aggregatedPoolData: LiquidityPoolDetails[];
 }
 
 interface PoolTableData {
+  assetAvatars: AssetAvatar[];
   assetCodes: string[];
   name: string;
   liquidity: string;
@@ -23,7 +27,8 @@ export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
   useEffect(() => {
     setPoolTableData(
       [...aggregatedPoolData].map(
-        ({ assetCodes, earnedFees, totalShares }) => ({
+        ({ assetAvatars, assetCodes, earnedFees, totalShares }) => ({
+          assetAvatars,
           assetCodes,
           name: getPoolName(assetCodes[0], assetCodes[1]),
           liquidity: totalShares,
@@ -57,13 +62,17 @@ export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
   ];
 
   const renderItemRow = ({
+    assetAvatars,
     assetCodes,
     name,
     liquidity,
     fees,
   }: PoolTableData) => (
     <>
-      <td>{name}</td>
+      <td className="AllPools__row">
+        <Avatar source={assetAvatars} size="1.5rem" />
+        {name}
+      </td>
       <td>{formatAmount(liquidity)}</td>
       <td>
         {formatAmount(fees[0])} {assetCodes[0]}
