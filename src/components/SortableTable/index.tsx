@@ -1,8 +1,10 @@
 // TODO: move to SDS
 import React, { useCallback, useLayoutEffect, useState } from "react";
-import { sortBy, chunk } from "lodash";
+import { chunk } from "lodash";
 import { Icon, Loader } from "@stellar/design-system";
 import { Pagination } from "components/Pagination";
+import { sortList } from "helpers/sortList";
+import { SortOrder } from "types/types.d";
 import "./styles.scss";
 
 interface TableColumnLabel {
@@ -19,11 +21,6 @@ interface SortableTableProps<DataItem> {
   isLoading?: boolean;
   emptyMessage?: string;
   pageSize?: number;
-}
-
-enum SortOrder {
-  asc = "asc",
-  desc = "desc",
 }
 
 const CSS_CLASS_SORTABLE = "sortable";
@@ -62,7 +59,7 @@ export const SortableTable = <DataItem,>({
       if (sortOrder === SortOrder.asc) {
         // second click: desc order
         sortedOrder = SortOrder.desc;
-        sortedData = sortBy(data, [sortKey]).reverse();
+        sortedData = sortList(data, sortKey, SortOrder.desc);
       } else {
         // third click: clear sort
         sortedKey = null;
@@ -70,7 +67,7 @@ export const SortableTable = <DataItem,>({
     } else {
       // first click: asc order
       sortedOrder = SortOrder.asc;
-      sortedData = sortBy(data, [sortKey]);
+      sortedData = sortList(data, sortKey);
     }
 
     setCurrentSortKey(sortedKey);
