@@ -1,0 +1,33 @@
+.TopList {
+  display: flex;
+  grid-gap: 7.25rem;
+  gap: 7.25rem;
+  row-gap: 1rem;
+
+  &__header {
+    display: flex;
+    grid-gap: 0.3rem;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__poolCount {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-medium);
+  }
+
+  &__pool__row {
+    @media (max-width: 900px) {
+      display: block;
+    }
+    display: flex;
+    grid-gap: 1.25rem;
+    gap: 1.25rem;
+
+    &__item {
+      align-items: center;
+      display: flex;
+      font-size: 0.875rem;
+    }
+  }
+}

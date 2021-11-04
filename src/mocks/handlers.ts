@@ -95,7 +95,7 @@ export const handlers = [
               shares: "2236067977",
               accounts: 1,
               trades: 1,
-              total_value_locked: "0",
+              total_value_locked: "300",
               earned_fees: [
                 {
                   asset: "XLM",
@@ -147,7 +147,7 @@ export const handlers = [
               shares: "9652784650",
               accounts: 3,
               trades: 7,
-              total_value_locked: "0",
+              total_value_locked: "200",
               earned_fees: [
                 {
                   asset: "XLM",
@@ -194,7 +194,7 @@ export const handlers = [
               shares: "3000000",
               accounts: 1,
               trades: 11,
-              total_value_locked: "0",
+              total_value_locked: "100",
               earned_fees: [
                 {
                   asset:
@@ -221,6 +221,107 @@ export const handlers = [
               ],
               created: 1634514560,
               updated: 1635371312,
+            },
+            {
+              id: "1f410fedd64d4d2f87d5209cb1fa8fd4c5025d34241833cb3fac2d99df8955bd",
+              paging_token:
+                "1f410fedd64d4d2f87d5209cb1fa8fd4c5025d34241833cb3fac2d99df8955bd",
+              assets: [
+                {
+                  asset: "XLM",
+                  amount: "24465549448",
+                  domain: "stellar.org",
+                  toml_info: {
+                    image: "https://stellar.expert/img/vendor/stellar.svg",
+                    orgName: "Stellar",
+                    name: "Lumen",
+                  },
+                },
+                {
+                  asset:
+                    "IDR-GDCFSG4DE5SE2OJ6MGSHC7R4JZYNMDQ6NPFXQOALRO3O2TMJWPNTUNWU-1",
+                  amount: "16358633113",
+                },
+              ],
+              type: 0,
+              fee: 30,
+              shares: "20000000000",
+              accounts: 1,
+              trades: 2,
+              total_value_locked: "700",
+              earned_fees: [
+                {
+                  asset: "XLM",
+                  all_time: 0,
+                },
+                {
+                  asset:
+                    "IDR-GDCFSG4DE5SE2OJ6MGSHC7R4JZYNMDQ6NPFXQOALRO3O2TMJWPNTUNWU-1",
+                  all_time: 10924102,
+                },
+              ],
+              volume: [
+                {
+                  asset: "XLM",
+                  all_time: 4465549448,
+                },
+                {
+                  asset:
+                    "IDR-GDCFSG4DE5SE2OJ6MGSHC7R4JZYNMDQ6NPFXQOALRO3O2TMJWPNTUNWU-1",
+                  all_time: 3641366887,
+                },
+              ],
+              created: 1635747708,
+              updated: 1635747783,
+            },
+            {
+              id: "b0e620b928aa23f8b42200d188cf97df8455484d30c8e1c5ade4015deee3c39c",
+              paging_token:
+                "b0e620b928aa23f8b42200d188cf97df8455484d30c8e1c5ade4015deee3c39c",
+              assets: [
+                {
+                  asset:
+                    "TBN-GCO47UX6AINCBVPNXIIDPWL33D6QWGUA4RBXSQWQXF75KTX7QJK3ZBD2-1",
+                  amount: "4700000000",
+                },
+                {
+                  asset:
+                    "TUS-GCO47UX6AINCBVPNXIIDPWL33D6QWGUA4RBXSQWQXF75KTX7QJK3ZBD2-1",
+                  amount: "2278809080665",
+                },
+              ],
+              type: 0,
+              fee: 30,
+              shares: "103490415015",
+              accounts: 1,
+              trades: 3,
+              total_value_locked: "0",
+              earned_fees: [
+                {
+                  asset:
+                    "TBN-GCO47UX6AINCBVPNXIIDPWL33D6QWGUA4RBXSQWQXF75KTX7QJK3ZBD2-1",
+                  all_time: 30000,
+                },
+                {
+                  asset:
+                    "TUS-GCO47UX6AINCBVPNXIIDPWL33D6QWGUA4RBXSQWQXF75KTX7QJK3ZBD2-1",
+                  all_time: 14471071,
+                },
+              ],
+              volume: [
+                {
+                  asset:
+                    "TBN-GCO47UX6AINCBVPNXIIDPWL33D6QWGUA4RBXSQWQXF75KTX7QJK3ZBD2-1",
+                  all_time: 20000000,
+                },
+                {
+                  asset:
+                    "TUS-GCO47UX6AINCBVPNXIIDPWL33D6QWGUA4RBXSQWQXF75KTX7QJK3ZBD2-1",
+                  all_time: 9676461263,
+                },
+              ],
+              created: 1635094799,
+              updated: 1635213542,
             },
           ],
         },

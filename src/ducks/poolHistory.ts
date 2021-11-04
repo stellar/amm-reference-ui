@@ -13,22 +13,19 @@ export const fetchPoolHistoryAction = createAsyncThunk<
   LiquidityPoolHistory[],
   string,
   { rejectValue: RejectMessage; state: RootState }
->(
-  "poolTransactions/fetchPoolHistoryAction",
-  async (poolId, { rejectWithValue }) => {
-    let poolHistory = [];
+>("poolHistory/fetchPoolHistoryAction", async (poolId, { rejectWithValue }) => {
+  let poolHistory = [];
 
-    try {
-      poolHistory = await fetchPoolHistory({ poolId });
-    } catch (error) {
-      return rejectWithValue({
-        errorString: getCatchError(error).message,
-      });
-    }
+  try {
+    poolHistory = await fetchPoolHistory({ poolId });
+  } catch (error) {
+    return rejectWithValue({
+      errorString: getCatchError(error).message,
+    });
+  }
 
-    return poolHistory;
-  },
-);
+  return poolHistory;
+});
 
 const initialState: PoolHistoryInitialState = {
   data: [],

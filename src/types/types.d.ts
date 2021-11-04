@@ -17,12 +17,19 @@ export interface RejectMessage {
 
 // Store
 export interface Store {
+  aggregatedPools: AggregatedPoolsInitialState;
   poolDetails: PoolDetailsInitialState;
   poolHistory: PoolHistoryInitialState;
   poolTransactions: PoolTransactionsInitialState;
 }
 
 export type StoreKey = keyof Store;
+
+export interface AggregatedPoolsInitialState {
+  data: LiquidityPoolStats[];
+  status: ActionStatus | undefined;
+  errorString?: string;
+}
 
 export interface PoolDetailsInitialState {
   data: LiquidityPoolDetails | null;
