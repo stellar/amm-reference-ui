@@ -4,6 +4,7 @@ import { chunk } from "lodash";
 import { Icon, Loader } from "@stellar/design-system";
 import { Pagination } from "components/Pagination";
 import { sortList } from "helpers/sortList";
+import { SortOrder } from "types/types.d";
 import "./styles.scss";
 
 interface TableColumnLabel {
@@ -20,11 +21,6 @@ interface SortableTableProps<DataItem> {
   isLoading?: boolean;
   emptyMessage?: string;
   pageSize?: number;
-}
-
-enum SortOrder {
-  asc = "asc",
-  desc = "desc",
 }
 
 const CSS_CLASS_SORTABLE = "sortable";
@@ -63,7 +59,7 @@ export const SortableTable = <DataItem,>({
       if (sortOrder === SortOrder.asc) {
         // second click: desc order
         sortedOrder = SortOrder.desc;
-        sortedData = sortList(data, sortKey, "desc");
+        sortedData = sortList(data, sortKey, SortOrder.desc);
       } else {
         // third click: clear sort
         sortedKey = null;

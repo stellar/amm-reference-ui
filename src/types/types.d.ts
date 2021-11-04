@@ -118,3 +118,9 @@ export interface ChartData {
   x: string;
   y: number;
 }
+
+// Table
+export enum SortOrder {
+  asc = "asc",
+  desc = "desc",
+}

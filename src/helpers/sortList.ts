@@ -1,5 +1,6 @@
 import BigNumber from "bignumber.js";
 import { get } from "lodash";
+import { SortOrder } from "types/types.d";
 
 type GenericObject = {
   [key: string]: any;
@@ -8,13 +9,13 @@ type GenericObject = {
 export const sortList = <T extends GenericObject>(
   data: T[],
   sortByKey: string,
-  sortOrder?: "asc" | "desc",
+  sortOrder?: SortOrder,
 ) => {
   if (!data.length) {
     return data;
   }
 
-  const isDescOrder = sortOrder === "desc";
+  const isDescOrder = sortOrder === SortOrder.desc;
 
   return [...data].sort((a, b) => {
     const valA = get(a, sortByKey);
