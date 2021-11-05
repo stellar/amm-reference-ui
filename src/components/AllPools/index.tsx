@@ -30,7 +30,7 @@ export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
         ({ assetAvatars, assetCodes, earnedFees, totalShares }) => ({
           assetAvatars,
           assetCodes,
-          name: getPoolName(assetCodes[0], assetCodes[1]),
+          name: getPoolName(assetCodes),
           liquidity: totalShares,
           fees: [`${earnedFees[0].all_time}`, `${earnedFees[0].all_time}`],
         }),
