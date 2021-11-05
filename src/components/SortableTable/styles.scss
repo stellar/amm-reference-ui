@@ -6,7 +6,6 @@ table.Table td:first-child:not(:last-child) {
 
 .TableContainer {
   position: relative;
-  overflow: auto;
   margin-top: 2rem;
 
   &--loading {
