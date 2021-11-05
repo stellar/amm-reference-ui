@@ -77,14 +77,14 @@ export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
       <td>
         {formatAmount(fees[0])} {assetCodes[0]}
       </td>
-      <td className="AllPools__adjustedRow">
+      <td>
         {formatAmount(fees[1])} {assetCodes[1]}
       </td>
     </>
   );
 
   return (
-    <div className="Section">
+    <div className="Section AllPools">
       <Heading4>All Liquidity Pools</Heading4>
       <Card>
         <SortableTable
