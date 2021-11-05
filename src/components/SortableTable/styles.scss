@@ -6,7 +6,6 @@ table.Table td:first-child:not(:last-child) {
 
 .TableContainer {
   position: relative;
-  overflow: auto;
   margin-top: 2rem;
 
   &--loading {
@@ -26,6 +25,9 @@ table.Table td:first-child:not(:last-child) {
 }
 
 .SortableTable {
+  td:not(:first-child):not(:nth-child(2)) {
+    text-align: right;
+  }
   th {
     .sortable {
       cursor: pointer;
@@ -38,7 +40,9 @@ table.Table td:first-child:not(:last-child) {
       }
     }
 
-    &:last-child:not(:first-child) {
+    &:not(:first-child):not(:nth-child(2)) {
+      text-align: right;
+
       .sortable {
         padding-right: 0;
         padding-left: 1.5rem;

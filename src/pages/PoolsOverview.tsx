@@ -24,7 +24,7 @@ export const PoolsOverview = () => {
   return (
     <Layout.Inset>
       <TopList aggregatedPoolData={aggregatedPools.data} />
-      <AllPools />
+      <AllPools aggregatedPoolData={aggregatedPools.data} />
     </Layout.Inset>
   );
 };
