@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { Layout } from "@stellar/design-system";
+import { errorReporting } from "@stellar/frontend-helpers";
 
 import { store } from "config/store";
 import { Header } from "components/Header";
@@ -14,6 +15,10 @@ import { NotFound } from "pages/NotFound";
 import { StellarNetwork } from "types/types.d";
 
 import "styles.scss";
+
+errorReporting.reportErrors({
+  projectName: "amm-demo",
+});
 
 export const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
