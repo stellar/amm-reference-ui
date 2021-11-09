@@ -25,7 +25,7 @@ export const TopList = ({ aggregatedPoolData }: TopListProps) => {
   useEffect(() => {
     setTopPools(
       [...aggregatedPoolData]
-        .sort((a, b) => Number(b.totalValueLocked) - Number(a.totalValueLocked))
+        .sort((a, b) => Number(b.totalAccounts) - Number(a.totalAccounts))
         .slice(0, LIST_LENGTH),
     );
   }, [aggregatedPoolData, LIST_LENGTH]);
