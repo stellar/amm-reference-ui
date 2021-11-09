@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import moment from "moment";
+import { formatDistanceToNow } from "date-fns";
 import { Heading4, TextLink } from "@stellar/design-system";
 import { Card } from "components/Card";
 import { SortableTable } from "components/SortableTable";
@@ -56,7 +56,7 @@ export const PoolTransactionsList = ({ poolId }: { poolId: string }) => {
     `${formatAmount(reserve.amount)} ${getAssetCode(reserve.asset)}`;
 
   const formatTimeAgo = (time: string) =>
-    moment(time, "YYYYMMDD").startOf("minute").fromNow();
+    formatDistanceToNow(new Date(time), { addSuffix: true });
 
   const getOperationLabel = (type: string) => {
     switch (type) {
