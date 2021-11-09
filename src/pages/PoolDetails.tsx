@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { Layout, Heading2 } from "@stellar/design-system";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { metrics } from "@stellar/frontend-helpers";
+
+import { METRIC_NAMES } from "constants/metricNames";
 import { Avatar } from "components/Avatar";
 import { AssetConversions } from "components/AssetConversions";
 import { Breadcrumbs } from "components/Breadcrumbs";
@@ -26,6 +29,10 @@ export const PoolDetails = ({ isDarkMode }: { isDarkMode: boolean }) => {
   const { poolDetails } = useRedux("poolDetails");
   const { poolHistory } = useRedux("poolHistory");
   const { poolId } = useParams<{ poolId: string }>();
+
+  useEffect(() => {
+    metrics.emitMetric(METRIC_NAMES.VIEW_DETAILS);
+  }, []);
 
   useEffect(() => {
     dispatch(fetchPoolDetailsAction(poolId));
