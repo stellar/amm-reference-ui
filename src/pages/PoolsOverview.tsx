@@ -5,12 +5,14 @@ import { metrics } from "@stellar/frontend-helpers";
 
 import { METRIC_NAMES } from "constants/metricNames";
 import { AllPools } from "components/AllPools";
+import { LoadingCard } from "components/LoadingCard";
 import { TopList } from "components/TopList";
 import {
   fetchAggregatedPoolsAction,
   resetAggregatedPoolsAction,
 } from "ducks/aggregatedPools";
 import { useRedux } from "hooks/useRedux";
+import { ActionStatus } from "types/types.d";
 
 export const PoolsOverview = () => {
   const dispatch = useDispatch();
@@ -30,8 +32,14 @@ export const PoolsOverview = () => {
 
   return (
     <Layout.Inset>
-      <TopList aggregatedPoolData={aggregatedPools.data} />
-      <AllPools aggregatedPoolData={aggregatedPools.data} />
+      {aggregatedPools.status === ActionStatus.PENDING ? (
+        <LoadingCard />
+      ) : (
+        <>
+          <TopList aggregatedPoolData={aggregatedPools.data} />
+          <AllPools aggregatedPoolData={aggregatedPools.data} />
+        </>
+      )}
     </Layout.Inset>
   );
 };

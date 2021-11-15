@@ -91,7 +91,7 @@ export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
           data={poolTableData}
           columnLabels={labels}
           renderItemRow={renderItemRow}
-          pageSize={5}
+          pageSize={10}
         />
       </Card>
     </div>
