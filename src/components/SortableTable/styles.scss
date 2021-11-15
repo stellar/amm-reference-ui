@@ -67,4 +67,10 @@ table.Table td:first-child:not(:last-child) {
       height: 100%;
     }
   }
+
+  &__clickableRow {
+    color: inherit;
+    display: contents;
+    text-decoration: none;
+  }
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
 import { Heading4 } from "@stellar/design-system";
 import { Avatar } from "components/Avatar";
 import { Card } from "components/Card";
@@ -16,6 +17,7 @@ interface AllPoolsProps {
 interface PoolTableData {
   assetAvatars: AssetAvatar[];
   assetCodes: string[];
+  href: string;
   name: string;
   liquidity: string;
   fees: string[];
@@ -27,9 +29,10 @@ export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
   useEffect(() => {
     setPoolTableData(
       [...aggregatedPoolData].map(
-        ({ assetAvatars, assetCodes, earnedFees, totalShares }) => ({
+        ({ assetAvatars, assetCodes, earnedFees, id, totalShares }) => ({
           assetAvatars,
           assetCodes,
+          href: `pool/${id}`,
           name: getPoolName(assetCodes),
           liquidity: totalShares,
           fees: [`${earnedFees[0].all_time}`, `${earnedFees[0].all_time}`],
