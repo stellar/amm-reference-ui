@@ -26,7 +26,7 @@ export interface Store {
 export type StoreKey = keyof Store;
 
 export interface AggregatedPoolsInitialState {
-  data: LiquidityPoolStats[];
+  data: LiquidityPoolDetails[];
   status: ActionStatus | undefined;
   errorString?: string;
 }
