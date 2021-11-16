@@ -1,5 +1,6 @@
 // TODO: move to SDS
 import React, { useCallback, useLayoutEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { chunk } from "lodash";
 import { Icon, Loader } from "@stellar/design-system";
 import { Pagination } from "components/Pagination";
@@ -131,9 +132,12 @@ export const SortableTable = <DataItem extends Record<string, any>>({
                 // eslint-disable-next-line react/no-array-index-key
                 <tr key={`row-${index}`}>
                   {item.href ? (
-                    <a className="SortableTable__clickableRow" href={item.href}>
+                    <Link
+                      className="SortableTable__clickableRow"
+                      to={item.href}
+                    >
                       <RowContents />
-                    </a>
+                    </Link>
                   ) : (
                     <RowContents />
                   )}
