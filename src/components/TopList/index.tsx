@@ -70,10 +70,7 @@ export const TopList = ({ aggregatedPoolData }: TopListProps) => {
           </div>
           <div className="TopList__pool__row">
             {topPools.map((pool) => (
-              <div
-                className="TopList__pool__row__item"
-                key={getPoolName(pool.assetCodes)}
-              >
+              <div className="TopList__pool__row__item" key={pool.id}>
                 <Avatar source={pool.assetAvatars} size="1.5rem" />
                 <span>{getPoolName(pool.assetCodes)}</span>
               </div>

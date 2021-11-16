@@ -1,5 +1,6 @@
 // TODO: move to SDS
 import React, { useCallback, useLayoutEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { chunk } from "lodash";
 import { Icon, Loader } from "@stellar/design-system";
 import { Pagination } from "components/Pagination";
@@ -25,7 +26,7 @@ interface SortableTableProps<DataItem> {
 
 const CSS_CLASS_SORTABLE = "sortable";
 
-export const SortableTable = <DataItem,>({
+export const SortableTable = <DataItem extends Record<string, any>>({
   data,
   columnLabels,
   renderItemRow,
@@ -119,13 +120,30 @@ export const SortableTable = <DataItem,>({
             </tr>
           </thead>
           <tbody>
-            {localData[currentPage - 1].map((item, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <tr key={`row-${index}`}>
-                {hideNumberColumn ? null : <td>{index + 1}</td>}
-                {renderItemRow(item)}
-              </tr>
-            ))}
+            {localData[currentPage - 1].map((item, index) => {
+              const RowContents = () => (
+                <>
+                  {hideNumberColumn ? null : <td>{index + 1}</td>}
+                  {renderItemRow(item)}
+                </>
+              );
+
+              return (
+                // eslint-disable-next-line react/no-array-index-key
+                <tr key={`row-${index}`}>
+                  {item.href ? (
+                    <Link
+                      className="SortableTable__clickableRow"
+                      to={item.href}
+                    >
+                      <RowContents />
+                    </Link>
+                  ) : (
+                    <RowContents />
+                  )}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       ) : null}
