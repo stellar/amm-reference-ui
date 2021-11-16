@@ -16,6 +16,7 @@ interface AllPoolsProps {
 interface PoolTableData {
   assetAvatars: AssetAvatar[];
   assetCodes: string[];
+  href: string;
   name: string;
   liquidity: string;
   fees: string[];
@@ -27,9 +28,10 @@ export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
   useEffect(() => {
     setPoolTableData(
       [...aggregatedPoolData].map(
-        ({ assetAvatars, assetCodes, earnedFees, totalShares }) => ({
+        ({ assetAvatars, assetCodes, earnedFees, id, totalShares }) => ({
           assetAvatars,
           assetCodes,
+          href: `pool/${id}`,
           name: getPoolName(assetCodes),
           liquidity: totalShares,
           fees: [`${earnedFees[0].all_time}`, `${earnedFees[0].all_time}`],
