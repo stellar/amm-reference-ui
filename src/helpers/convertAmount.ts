@@ -5,5 +5,5 @@ type Amount = string | number;
 export const formatAmount = (amount: Amount) =>
   new BigNumber(amount).toFormat();
 
-export const fromStroopsToNumber = (stroops: Amount) =>
+export const fromStroopsToLumen = (stroops: Amount) =>
   Number(new BigNumber(Number(stroops) / 1e7).toFixed(2));
