@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card } from "components/Card";
 import { Chart } from "components/Chart";
+import { fromStroopsToNumber } from "helpers/convertAmount";
 import { getCssVar } from "helpers/cssHelpers";
 import { ChartData, LiquidityPoolHistory } from "types/types.d";
 
@@ -29,7 +30,7 @@ export const DetailsChart = ({
     const formattedData = poolHistory.data.map((entry) => ({
       x: new Date(entry.ts * 1000).getDate().toString(),
       // TODO: total_value_locked not in history data
-      y: Number(entry.total_value_locked || 1),
+      y: fromStroopsToNumber(entry.total_value_locked || 1),
     }));
     setChartData(formattedData);
   }, [poolHistory]);
