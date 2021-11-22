@@ -6,7 +6,7 @@ import { Card } from "components/Card";
 import { SortableTable } from "components/SortableTable";
 import { STELLAR_EXPERT_TX } from "constants/apiUrls";
 import { fetchPoolTransactionsAction } from "ducks/poolTransactions";
-import { formatAmount } from "helpers/formatAmount";
+import { formatAmount } from "helpers/convertAmount";
 import { getAssetCode } from "helpers/getAssetCode";
 import { useRedux } from "hooks/useRedux";
 import {
