@@ -3,7 +3,7 @@ import { Loader } from "@stellar/design-system";
 import { Avatar } from "components/Avatar";
 import { Card } from "components/Card";
 import { StatItem } from "components/StatItem";
-import { formatAmount } from "helpers/formatAmount";
+import { formatAmount } from "helpers/convertAmount";
 import { formatConversion } from "helpers/formatConversion";
 import { useRedux } from "hooks/useRedux";
 import { ActionStatus, LiquidityPoolAsset } from "types/types.d";

@@ -3,7 +3,7 @@ import { Heading4 } from "@stellar/design-system";
 import { Avatar } from "components/Avatar";
 import { Card } from "components/Card";
 import { SortableTable } from "components/SortableTable";
-import { formatAmount } from "helpers/formatAmount";
+import { formatAmount } from "helpers/convertAmount";
 import { getPoolName } from "helpers/getPoolName";
 import { AssetAvatar, LiquidityPoolDetails } from "types/types.d";
 
