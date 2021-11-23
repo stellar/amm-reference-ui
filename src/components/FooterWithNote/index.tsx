@@ -24,9 +24,11 @@ export const FooterWithNote = () => (
         professional.
       </div>
     </Layout.Inset>
-    <Layout.Footer
-      gitHubLink="https://github.com/stellar/amm-reference-ui"
-      marginTop="1.5rem"
-    />
+    <div className="FooterWithNote__footer">
+      <Layout.Footer
+        gitHubLink="https://github.com/stellar/amm-reference-ui"
+        marginTop="1.5rem"
+      />
+    </div>
   </div>
 );

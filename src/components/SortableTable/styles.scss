@@ -6,7 +6,6 @@ table.Table td:first-child:not(:last-child) {
 
 .TableContainer {
   position: relative;
-  margin-top: 2rem;
 
   &--loading {
     opacity: var(--opacity-disabled-button);
@@ -34,6 +33,7 @@ table.Table td:first-child:not(:last-child) {
       position: relative;
       display: inline-block;
       padding-right: 1.5rem;
+      user-select: none;
 
       .SortableTable__sort {
         right: 0;
