@@ -89,12 +89,14 @@ export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
     <div className="Section AllPools">
       <Heading4>All Liquidity Pools</Heading4>
       <Card>
-        <SortableTable
-          data={poolTableData}
-          columnLabels={labels}
-          renderItemRow={renderItemRow}
-          pageSize={10}
-        />
+        <div className="AllPools__table">
+          <SortableTable
+            data={poolTableData}
+            columnLabels={labels}
+            renderItemRow={renderItemRow}
+            pageSize={10}
+          />
+        </div>
       </Card>
     </div>
   );

@@ -39,6 +39,7 @@
 
     &__note {
       font-size: 0.75rem;
+      font-weight: var(--font-weight-medium);
       line-height: 1.25rem;
 
       &--positive {
@@ -65,6 +66,7 @@
       border: none;
       cursor: pointer;
       font-size: var(--font-size-secondary);
+      font-weight: var(--font-weight-medium);
       opacity: 0.4;
       -webkit-appearance: none;
       &--active {

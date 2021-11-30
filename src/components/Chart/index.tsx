@@ -150,7 +150,10 @@ export const Chart = ({
           <VictoryAxis
             style={{
               axis: { stroke: `${theme.bgColor}` },
-              tickLabels: { fill: `${theme.tickLabels}` },
+              tickLabels: {
+                fill: `${theme.tickLabels}`,
+                fontFamily: "inherit",
+              },
             }}
           />
 

@@ -2,4 +2,9 @@
   &__row {
     display: flex;
   }
+  &__table {
+    th:not(:first-child):not(:nth-child(2)) {
+      width: 16rem;
+    }
+  }
 }
