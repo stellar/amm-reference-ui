@@ -31,6 +31,8 @@
 
     img {
       @extend %avatarDimensions;
+      // add white background to all icons regardless of dark mode
+      background-color: #fff;
       display: block;
     }
 
