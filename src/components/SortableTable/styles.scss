@@ -69,8 +69,6 @@ table.Table td:first-child:not(:last-child) {
   }
 
   &__clickableRow {
-    color: inherit;
-    display: contents;
-    text-decoration: none;
+    cursor: pointer;
   }
 }

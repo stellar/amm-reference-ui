@@ -25,13 +25,8 @@ export const PoolStats = () => {
       return "";
     }
 
-    if (asset["24h"]) {
-      return `${formatConversion(asset["24h"])} ${asset.assetCode}`;
-    }
-
-    // TODO: remove once we get 24h data
-    if (asset.all_time) {
-      return `${formatConversion(asset.all_time)} ${asset.assetCode}`;
+    if (asset["1d"]) {
+      return `${formatConversion(asset["1d"])} ${asset.assetCode}`;
     }
 
     if (asset.amount) {

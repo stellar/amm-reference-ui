@@ -1,6 +1,6 @@
 // TODO: move to SDS
 import React, { useCallback, useLayoutEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { chunk } from "lodash";
 import { Icon, Loader } from "@stellar/design-system";
 import { Pagination } from "components/Pagination";
@@ -44,6 +44,7 @@ export const SortableTable = <DataItem extends Record<string, any>>({
   const [currentSortKey, setCurrentSortKey] = useState<string | null>(null);
   const [sortOrder, setSortOder] = useState<SortOrder | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const history = useHistory();
 
   useLayoutEffect(() => {
     const chunkedData = chunkData(data);
@@ -120,30 +121,20 @@ export const SortableTable = <DataItem extends Record<string, any>>({
             </tr>
           </thead>
           <tbody>
-            {localData[currentPage - 1].map((item, index) => {
-              const RowContents = () => (
-                <>
+            {localData[currentPage - 1].map(
+              (item, index) => (
+                /* eslint-disable react/no-array-index-key */
+                <tr
+                  className={item.href ? `SortableTable__clickableRow` : ""}
+                  key={`row-${index}`}
+                  onClick={() => (item.href ? history.push(item.href) : null)}
+                >
                   {hideNumberColumn ? null : <td>{index + 1}</td>}
                   {renderItemRow(item)}
-                </>
-              );
-
-              return (
-                // eslint-disable-next-line react/no-array-index-key
-                <tr key={`row-${index}`}>
-                  {item.href ? (
-                    <Link
-                      className="SortableTable__clickableRow"
-                      to={item.href}
-                    >
-                      <RowContents />
-                    </Link>
-                  ) : (
-                    <RowContents />
-                  )}
                 </tr>
-              );
-            })}
+              ),
+              /* eslint-enable */
+            )}
           </tbody>
         </table>
       ) : null}
