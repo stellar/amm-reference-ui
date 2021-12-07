@@ -28,7 +28,6 @@ export const DetailsChart = ({
   useEffect(() => {
     const formattedData = poolHistory.data.map((entry) => ({
       x: new Date(entry.ts * 1000).getDate().toString(),
-      // TODO: total_value_locked not in history data
       y: entry.totalValueLocked || 1,
     }));
     setChartData(formattedData);

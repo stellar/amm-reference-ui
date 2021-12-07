@@ -95,9 +95,7 @@ export interface LiquidityPoolTransaction {
 
 export type LiquidityPoolHistory = {
   ts: number;
-  /* eslint-disable camelcase */
   totalValueLocked: number;
-  /* eslint-enable camelcase */
 };
 export interface AssetAvatar {
   altText: string;
