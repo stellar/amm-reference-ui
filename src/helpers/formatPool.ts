@@ -1,10 +1,6 @@
+import { fromStroopsToLumen } from "helpers/convertAmount";
 import { getAssetCode } from "helpers/getAssetCode";
-
-type VolumeAsset = {
-  asset: string;
-  // eslint-disable-next-line camelcase
-  all_time: number | string;
-};
+import { LiquidityPoolAssetInterval } from "types/types.d";
 
 type Asset = {
   asset: string;
@@ -19,17 +15,30 @@ type Asset = {
   };
 };
 
-const addAssetCode = (items: VolumeAsset[]) =>
+const addAssetCode = (items: LiquidityPoolAssetInterval[]) =>
   items.map((i) => ({
     assetCode: getAssetCode(i.asset, "-"),
     ...i,
   }));
 
+const convertObjValToLumens = (item: LiquidityPoolAssetInterval) => {
+  const formattedItem = {} as {
+    [key: string]: any;
+  } & LiquidityPoolAssetInterval;
+  Object.entries(item).forEach(([k, v]) => {
+    formattedItem[k] = typeof v === "number" ? fromStroopsToLumen(v) : v;
+  });
+  return formattedItem;
+};
+
+const convertAssetAmountsToLumens = (items: LiquidityPoolAssetInterval[]) =>
+  items.map((item) => convertObjValToLumens(item));
+
 const formatAssets = (items: Asset[]) =>
   items.map((i) => ({
     assetCode: getAssetCode(i.asset, "-"),
     asset: i.asset,
-    amount: i.amount,
+    amount: fromStroopsToLumen(i.amount),
   }));
 
 const getReserveAssets = (assets: Asset[]) => [
@@ -49,10 +58,12 @@ export const formatPool = (data: any) => ({
   assetCodes: getReserveAssets(data.assets),
   assetAvatars: getAvatarData(data.assets),
   fee: data.fee,
-  totalShares: data.shares,
+  totalShares: fromStroopsToLumen(data.shares),
   totalAccounts: data.accounts,
   totalTrades: data.trades,
-  earnedFees: addAssetCode(data.earned_fees),
-  totalValueLocked: data.total_value_locked,
-  volume: addAssetCode(data.volume),
+  earnedFees: addAssetCode(convertAssetAmountsToLumens(data.earned_fees)),
+  earnedValue: convertObjValToLumens(data.earned_value),
+  totalValueLocked: fromStroopsToLumen(data.total_value_locked),
+  volume: addAssetCode(convertAssetAmountsToLumens(data.volume)),
+  volumeValue: convertObjValToLumens(data.volume_value),
 });
