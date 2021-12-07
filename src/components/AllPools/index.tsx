@@ -18,7 +18,7 @@ interface PoolTableData {
   assetCodes: string[];
   href: string;
   name: string;
-  liquidity: string;
+  liquidity: number;
   fees: string[];
 }
 
@@ -34,7 +34,7 @@ export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
           href: `pool/${id}`,
           name: getPoolName(assetCodes),
           liquidity: totalShares,
-          fees: [`${earnedFees[0].all_time}`, `${earnedFees[0].all_time}`],
+          fees: [`${earnedFees[0]["1d"]}`, `${earnedFees[1]["1d"]}`],
         }),
       ),
     );

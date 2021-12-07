@@ -52,9 +52,8 @@ export interface LiquidityPoolAsset {
   asset: string;
   assetCode?: string;
   amount?: string | number;
-  "24h"?: string | number;
+  "1d"?: string | number;
   "7d"?: string | number;
-  "1y"?: string | number;
   // eslint-disable-next-line camelcase
   all_time?: string | number;
 }
@@ -65,13 +64,12 @@ export interface LiquidityPoolReserve extends LiquidityPoolAsset {
 }
 
 export interface LiquidityPoolAssetInterval extends LiquidityPoolAsset {
-  // TODO: put these back once available
-  // "24h": string | number;
-  // "7d": string | number;
-  // "1y": string | number;
+  "1d": string | number;
+  "7d": string | number;
   // eslint-disable-next-line camelcase
   all_time: string | number;
 }
+
 export interface LiquidityPoolOperation {
   [key: string]: any;
   id: string;
@@ -97,9 +95,7 @@ export interface LiquidityPoolTransaction {
 
 export type LiquidityPoolHistory = {
   ts: number;
-  /* eslint-disable camelcase */
-  total_value_locked: string;
-  /* eslint-enable camelcase */
+  totalValueLocked: number;
 };
 export interface AssetAvatar {
   altText: string;
@@ -112,10 +108,10 @@ export interface LiquidityPoolDetails {
   fee: number;
   assetCodes: string[];
   assetAvatars: AssetAvatar[];
-  totalShares: string;
+  totalShares: number;
   totalAccounts: string;
   totalTrades: string;
-  totalValueLocked: string;
+  totalValueLocked: number;
   earnedFees: LiquidityPoolAssetInterval[];
   volume: LiquidityPoolAssetInterval[];
 }
