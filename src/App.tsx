@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import { Layout } from "@stellar/design-system";
 import { errorReporting } from "@stellar/frontend-helpers";
 
+import { ROUTES } from "constants/routes";
+
 import { store } from "config/store";
 import { Header } from "components/Header";
 import { NetworkIndicator } from "components/NetworkIndicator";
@@ -34,7 +36,7 @@ export const App = () => {
       <Router>
         <Header
           projectTitle="AMM Demo"
-          projectLink="/"
+          projectLink={ROUTES.HOME}
           hasDarkModeToggle
           onDarkModeToggleEnd={() => {
             setIsDarkMode(isDarkMode);
@@ -44,11 +46,11 @@ export const App = () => {
 
         <Layout.Content>
           <Switch>
-            <Route exact path="/">
+            <Route exact path={ROUTES.HOME}>
               <PoolsOverview />
             </Route>
 
-            <Route exact path="/pool/:poolId">
+            <Route exact path={`${ROUTES.POOL_DETAILS}/:poolId`}>
               <PoolDetails isDarkMode={isDarkMode} />
             </Route>
 
