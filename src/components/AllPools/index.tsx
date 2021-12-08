@@ -5,6 +5,7 @@ import { Card } from "components/Card";
 import { SortableTable } from "components/SortableTable";
 import { formatAmount } from "helpers/convertAmount";
 import { getPoolName } from "helpers/getPoolName";
+import { getPoolDetailsUrl } from "helpers/urlHelpers";
 import { AssetAvatar, LiquidityPoolDetails } from "types/types.d";
 
 import "./styles.scss";
@@ -31,7 +32,7 @@ export const AllPools = ({ aggregatedPoolData }: AllPoolsProps) => {
         ({ assetAvatars, assetCodes, earnedFees, id, totalShares }) => ({
           assetAvatars,
           assetCodes,
-          href: `pool/${id}`,
+          href: getPoolDetailsUrl(id),
           name: getPoolName(assetCodes),
           liquidity: totalShares,
           fees: [`${earnedFees[0]["1d"]}`, `${earnedFees[1]["1d"]}`],

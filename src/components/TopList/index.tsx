@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { IconButton, Icon } from "@stellar/design-system";
 import { Avatar } from "components/Avatar";
 import { Card } from "components/Card";
 import { Tooltip } from "components/Tooltip";
+import { getPoolDetailsUrl } from "helpers/urlHelpers";
 import { getPoolName } from "helpers/getPoolName";
 import { LiquidityPoolDetails } from "types/types.d";
 
@@ -69,11 +71,15 @@ export const TopList = ({ aggregatedPoolData }: TopListProps) => {
             </Tooltip>
           </div>
           <div className="TopList__pool__row">
-            {topPools.map((pool) => (
-              <div className="TopList__pool__row__item" key={pool.id}>
-                <Avatar source={pool.assetAvatars} size="1.5rem" />
-                <span>{getPoolName(pool.assetCodes)}</span>
-              </div>
+            {topPools.map(({ assetAvatars, assetCodes, id }) => (
+              <Link
+                className="TopList__pool__row__item"
+                key={id}
+                to={getPoolDetailsUrl(id)}
+              >
+                <Avatar source={assetAvatars} size="1.5rem" />
+                <span>{getPoolName(assetCodes)}</span>
+              </Link>
             ))}
           </div>
         </div>
