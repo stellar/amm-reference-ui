@@ -32,7 +32,7 @@ export const fetchPoolHistory = async ({ poolId }: FetchPoolHistoryProps) => {
     shares: fromStroopsToLumen(record.shares),
     totalValueLocked: fromStroopsToLumen(record.total_value_locked),
     trades: record.trades,
-    ts: record.ts,
+    ts: record.ts * 1000,
     volume: formatAmounts(record.volume),
     volumeValue: fromStroopsToLumen(record.volume_value),
   }));

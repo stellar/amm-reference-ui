@@ -11,11 +11,32 @@ interface DetailsChartProps {
   poolHistory: { data: LiquidityPoolHistory[] };
 }
 
+const findSegmentBoundaryIndex = (
+  data: LiquidityPoolHistory[],
+  daysAgo: number,
+) => {
+  /* iterate over chartData and find the timestamp 
+  that corresponds to the relative date we're looking. 
+  For ex, for 30 days ago, find which timestamp is ~ 30 days ago */
+
+  const today = new Date();
+  const priorDateTs = new Date().setDate(today.getDate() - daysAgo);
+
+  const index = data.findIndex((datum) => datum.ts < priorDateTs);
+
+  /* if the most recent entry is the only one that falls within our boundary
+  OR if we can't find any entries that fall within our boundary, 
+  just return the last 2 entries so we have something to look at */
+  return index > 0 ? index : 2;
+};
+
 export const DetailsChart = ({
   isDarkMode,
   poolHistory,
 }: DetailsChartProps) => {
   const [chartData, setChartData] = useState([] as ChartData[]);
+  const [thirtyDayIndex, setThirtyDayIndex] = useState(30);
+  const [sevenDayIndex, setSevenDayIndex] = useState(7);
 
   const generateTheme = () => ({
     primaryColor: getCssVar("--pal-brand-primary"),
@@ -27,7 +48,7 @@ export const DetailsChart = ({
 
   useEffect(() => {
     const formattedData = poolHistory.data.map((entry) => {
-      const dateInstance = new Date(entry.ts * 1000);
+      const dateInstance = new Date(entry.ts);
 
       return {
         x: `${dateInstance.getMonth() + 1}/${dateInstance.getDate()}`,
@@ -35,6 +56,10 @@ export const DetailsChart = ({
       };
     });
     setChartData(formattedData);
+    setThirtyDayIndex(
+      findSegmentBoundaryIndex(poolHistory.data.slice(0, 30), 30),
+    );
+    setSevenDayIndex(findSegmentBoundaryIndex(poolHistory.data.slice(0, 7), 7));
   }, [poolHistory]);
 
   useEffect(() => {
@@ -52,8 +77,8 @@ export const DetailsChart = ({
           }}
           theme={theme}
           timeframes={[
-            { label: "1W", segments: 7 },
-            { label: "1M", segments: 30 },
+            { label: "1W", segments: sevenDayIndex },
+            { label: "1M", segments: thirtyDayIndex },
           ]}
         />
       </Card>
