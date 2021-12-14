@@ -20,7 +20,7 @@ const findSegmentBoundaryIndex = (
   For ex, for 30 days ago, find which timestamp is ~ 30 days ago */
 
   const today = new Date();
-  const priorDateTs = new Date().setDate(today.getDate() - daysAgo);
+  const priorDateTs = new Date().setDate(today.getDate() - daysAgo + 1);
 
   const index = data.findIndex((datum) => datum.ts < priorDateTs);
 
