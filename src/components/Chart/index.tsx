@@ -145,9 +145,10 @@ export const Chart = ({
         <VictoryChart
           height={350}
           width={700}
-          padding={{ top: 30, bottom: 30, left: 10, right: 10 }}
+          padding={{ top: 30, bottom: 30, left: 20, right: 20 }}
         >
           <VictoryAxis
+            tickCount={4}
             style={{
               axis: { stroke: `${theme.bgColor}` },
               tickLabels: {

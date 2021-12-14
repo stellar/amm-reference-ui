@@ -26,10 +26,14 @@ export const DetailsChart = ({
   const [theme, setTheme] = useState(generateTheme());
 
   useEffect(() => {
-    const formattedData = poolHistory.data.map((entry) => ({
-      x: new Date(entry.ts * 1000).getDate().toString(),
-      y: entry.totalValueLocked || 1,
-    }));
+    const formattedData = poolHistory.data.map((entry) => {
+      const dateInstance = new Date(entry.ts * 1000);
+
+      return {
+        x: `${dateInstance.getMonth() + 1}/${dateInstance.getDate()}`,
+        y: entry.totalValueLocked,
+      };
+    });
     setChartData(formattedData);
   }, [poolHistory]);
 
@@ -48,8 +52,8 @@ export const DetailsChart = ({
           }}
           theme={theme}
           timeframes={[
-            { label: "1M", segments: 30 },
             { label: "1W", segments: 7 },
+            { label: "1M", segments: 30 },
           ]}
         />
       </Card>
