@@ -18,7 +18,7 @@ const formatAmounts = (items: HistoryItem[]) =>
 
 export const fetchPoolHistory = async ({ poolId }: FetchPoolHistoryProps) => {
   const historyResponse = await fetch(
-    `${STELLAR_EXPERT_AMM_URL}/liquidity-pool/${poolId}/stats-history`,
+    `${STELLAR_EXPERT_AMM_URL}/liquidity-pool/${poolId}/stats-history?limit=200`,
   );
 
   const history = await historyResponse.json();
