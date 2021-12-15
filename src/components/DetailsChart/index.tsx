@@ -15,19 +15,21 @@ const findSegmentBoundaryIndex = (
   data: LiquidityPoolHistory[],
   daysAgo: number,
 ) => {
-  /* iterate over chartData and find the timestamp 
+  /* iterate over poolHistory.data and find the first timestamp 
   that corresponds to the relative date we're looking. 
   For ex, for 30 days ago, find which timestamp is ~ 30 days ago */
 
   const today = new Date();
+
+  // We want to find the first date that is newer than daysAgo + 1
   const priorDateTs = new Date().setDate(today.getDate() - daysAgo + 1);
 
   const index = data.findIndex((datum) => datum.ts < priorDateTs);
 
   /* if the most recent entry is the only one that falls within our boundary
   OR if we can't find any entries that fall within our boundary, 
-  just return the last 2 entries so we have something to look at */
-  return index > 0 ? index : 2;
+  just return index 1 so we have at least 2 points to look at */
+  return index > 0 ? index : 1;
 };
 
 export const DetailsChart = ({
