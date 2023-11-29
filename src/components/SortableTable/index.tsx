@@ -1,11 +1,11 @@
 // TODO: move to SDS
 import React, { useCallback, useLayoutEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { chunk } from "lodash";
 import { Icon, Loader } from "@stellar/design-system";
 import { Pagination } from "components/Pagination";
 import { sortList } from "helpers/sortList";
-import { SortOrder } from "types/types.d";
+import { SortOrder } from "types/types";
 import "./styles.scss";
 
 interface TableColumnLabel {
@@ -44,7 +44,7 @@ export const SortableTable = <DataItem extends Record<string, any>>({
   const [currentSortKey, setCurrentSortKey] = useState<string | null>(null);
   const [sortOrder, setSortOder] = useState<SortOrder | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useLayoutEffect(() => {
     const chunkedData = chunkData(data);
@@ -123,11 +123,10 @@ export const SortableTable = <DataItem extends Record<string, any>>({
           <tbody>
             {localData[currentPage - 1].map(
               (item, index) => (
-                /* eslint-disable react/no-array-index-key */
                 <tr
                   className={item.href ? `SortableTable__clickableRow` : ""}
                   key={`row-${index}`}
-                  onClick={() => (item.href ? history.push(item.href) : null)}
+                  onClick={() => (item.href ? navigate(item.href) : null)}
                 >
                   {hideNumberColumn ? null : <td>{index + 1}</td>}
                   {renderItemRow(item)}

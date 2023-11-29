@@ -9,15 +9,16 @@ import { fetchPoolTransactionsAction } from "ducks/poolTransactions";
 import { formatAmount } from "helpers/convertAmount";
 import { getAssetCode } from "helpers/getAssetCode";
 import { useRedux } from "hooks/useRedux";
+import { AppDispatch } from "config/store";
 import {
   LiquidityPoolTransaction,
   LiquidityPoolReserve,
   ActionStatus,
-} from "types/types.d";
+} from "types/types";
 
 export const PoolTransactionsList = ({ poolId }: { poolId: string }) => {
   const { poolTransactions } = useRedux("poolTransactions");
-  const dispath = useDispatch();
+  const dispath: AppDispatch = useDispatch();
 
   useEffect(() => {
     dispath(fetchPoolTransactionsAction(poolId));

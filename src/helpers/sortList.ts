@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 import { get } from "lodash";
-import { SortOrder } from "types/types.d";
+import { SortOrder } from "types/types";
 
 type GenericObject = {
   [key: string]: any;

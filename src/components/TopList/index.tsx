@@ -6,7 +6,7 @@ import { Card } from "components/Card";
 import { Tooltip } from "components/Tooltip";
 import { getPoolDetailsUrl } from "helpers/urlHelpers";
 import { getPoolName } from "helpers/getPoolName";
-import { LiquidityPoolDetails } from "types/types.d";
+import { LiquidityPoolDetails } from "types/types";
 
 import "./styles.scss";
 

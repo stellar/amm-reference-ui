@@ -12,10 +12,11 @@ import {
   resetAggregatedPoolsAction,
 } from "ducks/aggregatedPools";
 import { useRedux } from "hooks/useRedux";
-import { ActionStatus } from "types/types.d";
+import { AppDispatch } from "config/store";
+import { ActionStatus } from "types/types";
 
 export const PoolsOverview = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const { aggregatedPools } = useRedux("aggregatedPools");
 
   useEffect(() => {

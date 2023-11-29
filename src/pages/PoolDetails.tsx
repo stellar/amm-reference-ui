@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Layout, Heading2 } from "@stellar/design-system";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { metrics } from "@stellar/frontend-helpers";
 
@@ -21,10 +21,11 @@ import {
 } from "ducks/poolHistory";
 import { PoolStats } from "components/PoolStats";
 import { useRedux } from "hooks/useRedux";
+import { AppDispatch } from "config/store";
 
 export const PoolDetails = ({ isDarkMode }: { isDarkMode: boolean }) => {
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { poolDetails } = useRedux("poolDetails");
   const { poolHistory } = useRedux("poolHistory");
@@ -35,8 +36,10 @@ export const PoolDetails = ({ isDarkMode }: { isDarkMode: boolean }) => {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchPoolDetailsAction(poolId));
-    dispatch(fetchPoolHistoryAction(poolId));
+    if (poolId) {
+      dispatch(fetchPoolDetailsAction(poolId));
+      dispatch(fetchPoolHistoryAction(poolId));
+    }
 
     return () => {
       dispatch(resetPoolDetailsAction());
@@ -45,12 +48,12 @@ export const PoolDetails = ({ isDarkMode }: { isDarkMode: boolean }) => {
   }, [dispatch, poolId]);
 
   const handleRouteClick = (route: string) => {
-    history.push(route);
+    navigate(route);
   };
 
   const getAssetPairString = () => poolDetails.data?.assetCodes.join(" / ");
 
-  if (!poolDetails.data) {
+  if (!poolId || !poolDetails.data) {
     return null;
   }
 

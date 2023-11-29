@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Card } from "components/Card";
 import { Chart } from "components/Chart";
 import { getCssVar } from "helpers/cssHelpers";
-import { ChartData, LiquidityPoolHistory } from "types/types.d";
+import { ChartData, LiquidityPoolHistory } from "types/types";
 
 import "./styles.scss";
 
@@ -15,8 +15,8 @@ const findSegmentBoundaryIndex = (
   data: LiquidityPoolHistory[],
   daysAgo: number,
 ) => {
-  /* iterate over poolHistory.data and find the first timestamp 
-  that corresponds to the relative date we're looking. 
+  /* iterate over poolHistory.data and find the first timestamp
+  that corresponds to the relative date we're looking.
   For ex, for 30 days ago, find which timestamp is ~ 30 days ago */
 
   const today = new Date();
@@ -27,7 +27,7 @@ const findSegmentBoundaryIndex = (
   const index = data.findIndex((datum) => datum.ts < priorDateTs);
 
   /* if the most recent entry is the only one that falls within our boundary
-  OR if we can't find any entries that fall within our boundary, 
+  OR if we can't find any entries that fall within our boundary,
   just return index 1 so we have at least 2 points to look at */
   return index > 0 ? index : 1;
 };

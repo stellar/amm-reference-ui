@@ -4,7 +4,7 @@ import { VictoryArea, VictoryAxis, VictoryChart, VictoryGroup } from "victory";
 import { Tooltip } from "components/Tooltip";
 import { getRgbaFromHex } from "helpers/cssHelpers";
 import { formatAmount } from "helpers/convertAmount";
-import { ChartData } from "types/types.d";
+import { ChartData } from "types/types";
 
 import "./styles.scss";
 

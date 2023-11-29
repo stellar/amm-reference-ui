@@ -1,6 +1,6 @@
 import { STELLAR_EXPERT_AMM_URL } from "constants/apiUrls";
 import { formatPool } from "helpers/formatPool";
-import { LiquidityPoolDetails } from "types/types.d";
+import { LiquidityPoolDetails } from "types/types";
 
 export const fetchPoolDetails = async (
   poolId: string,

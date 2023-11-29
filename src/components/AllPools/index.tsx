@@ -6,7 +6,7 @@ import { SortableTable } from "components/SortableTable";
 import { formatAmount } from "helpers/convertAmount";
 import { getPoolName } from "helpers/getPoolName";
 import { getPoolDetailsUrl } from "helpers/urlHelpers";
-import { AssetAvatar, LiquidityPoolDetails } from "types/types.d";
+import { AssetAvatar, LiquidityPoolDetails } from "types/types";
 
 import "./styles.scss";
 
