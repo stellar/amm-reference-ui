@@ -14,6 +14,7 @@ import { reducer as poolDetails } from "ducks/poolDetails";
 import { reducer as poolTransactions } from "ducks/poolTransactions";
 import { reducer as poolHistory } from "ducks/poolHistory";
 
+export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 
 const loggerMiddleware =

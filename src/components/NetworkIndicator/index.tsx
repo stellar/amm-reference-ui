@@ -1,4 +1,4 @@
-import { StellarNetwork } from "types/types.d";
+import { StellarNetwork } from "types/types";
 import "./styles.scss";
 
 const networkInfo = {

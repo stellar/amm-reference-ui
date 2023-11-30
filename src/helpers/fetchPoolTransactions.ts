@@ -1,7 +1,4 @@
-import {
-  LiquidityPoolOperation,
-  LiquidityPoolTransaction,
-} from "types/types.d";
+import { LiquidityPoolOperation, LiquidityPoolTransaction } from "types/types";
 
 interface FetchPoolTransactionsProps {
   server: any;

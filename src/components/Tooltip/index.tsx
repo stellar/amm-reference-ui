@@ -94,6 +94,7 @@ export const Tooltip: React.FC<TooltipProps> & TooltipComponent = ({
         ref={referenceEl}
         className="TooltipNew__component"
         onClick={() => setIsTooltipVisible(!isTooltipVisible)}
+        role="button"
       >
         {children}
       </div>

@@ -6,7 +6,7 @@ import { getAssetCode } from "helpers/getAssetCode";
 import {
   LiquidityPoolReserve,
   AssetAvatar as AssetAvatarType,
-} from "types/types.d";
+} from "types/types";
 import "./styles.scss";
 
 interface AssetConversionsProps {

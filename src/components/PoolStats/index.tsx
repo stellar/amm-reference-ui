@@ -6,7 +6,7 @@ import { StatItem } from "components/StatItem";
 import { formatAmount } from "helpers/convertAmount";
 import { formatConversion } from "helpers/formatConversion";
 import { useRedux } from "hooks/useRedux";
-import { ActionStatus, LiquidityPoolAsset } from "types/types.d";
+import { ActionStatus, LiquidityPoolAsset } from "types/types";
 import "./styles.scss";
 
 export const PoolStats = () => {

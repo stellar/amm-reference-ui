@@ -1,6 +1,6 @@
 import { fromStroopsToLumen } from "helpers/convertAmount";
 import { getAssetCode } from "helpers/getAssetCode";
-import { LiquidityPoolAssetInterval } from "types/types.d";
+import { LiquidityPoolAssetInterval } from "types/types";
 
 type Asset = {
   asset: string;

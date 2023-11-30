@@ -1,12 +1,12 @@
 import { STELLAR_EXPERT_AMM_URL } from "constants/apiUrls";
 import { formatPool } from "helpers/formatPool";
-import { LiquidityPoolDetails } from "types/types.d";
+import { LiquidityPoolDetails } from "types/types";
 
 const AGGREGATED_POOL_PATH = `${STELLAR_EXPERT_AMM_URL}/liquidity-pool/`;
-/* 
-  Looping through pools until completion is not ideal, 
-  but until we are able to build an API to do that, this is our only option. 
-  Maxing this out at 10 so to prevent huge wait times 
+/*
+  Looping through pools until completion is not ideal,
+  but until we are able to build an API to do that, this is our only option.
+  Maxing this out at 10 so to prevent huge wait times
   as the number of pools of increases.
 */
 const MAX_FETCHES = 10;
